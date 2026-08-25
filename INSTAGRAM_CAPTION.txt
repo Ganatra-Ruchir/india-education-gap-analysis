@@ -1,0 +1,17 @@
+What do India's classrooms actually tell us? 📚🇮🇳
+
+I stopped looking at the national literacy average and started looking at the spread — state by state. Three things stood out:
+
+📊 ~20 percentage points separate the top and bottom states
+👧 The male–female literacy gap tops 11 points in some states
+🏫 Crowded classrooms and school dropout move together (r ≈ 0.89)
+
+That last one matters most. A high pupil-teacher ratio tracking with higher dropout isn't destiny — it's a policy lever. Hire teachers, shrink classes, keep kids in school.
+
+This is a small open-source data project framed around UN SDG 4: Quality Education. Full code + charts on my GitHub (link in bio). Fork it, drop in your own data, and see what your state's numbers say.
+
+(Note: current figures are from an illustrative sample dataset — real Census/UDISE+ data going in next.)
+
+What question would YOU ask of India's education data? 👇
+
+#DataAnalysis #DataScience #Python #Education #SDG4 #India #OpenData #DataViz #EdTech #LearningInPublic #DataAnalyst #Pandas
