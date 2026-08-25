@@ -35,14 +35,14 @@ def stat(x, big, label, color):
 
 ax.add_patch(patches.Rectangle((5, 27), 90, 26, facecolor="white",
              edgecolor=INK, linewidth=1.5, zorder=1))
-stat(22, "~20 pts", "gap between top and\nbottom states", TEAL)
-stat(50, "11+ pts", "widest male–female\nliteracy gap", ACCENT)
-stat(78, "r = 0.89", "crowded classes track\nwith dropout", TEAL)
+stat(22, "~30 pts", "gap between top and\nbottom states", TEAL)
+stat(50, "27.9 pts", "widest male–female\nliteracy gap", ACCENT)
+stat(78, "r = -0.74", "literacy tracks a\nsmaller gender gap", TEAL)
 
 # bottom line
-ax.text(6, 18, "Crowded classrooms and dropout travel together.", color=INK,
+ax.text(6, 18, "Higher literacy states have smaller gender gaps.", color=INK,
         fontsize=15, fontweight="bold", va="center")
-ax.text(6, 13.5, "That's not destiny — it's a policy lever.", color=INK,
+ax.text(6, 13.5, "Classroom crowding, though? No clear link to pass rates.", color=INK,
         fontsize=13, style="italic", va="center")
 
 # footer
@@ -53,7 +53,7 @@ ax.text(94, 3, "data analysis · open source", color=CREAM, fontsize=11,
         va="center", ha="right")
 
 # small disclaimer
-ax.text(94, 8.5, "illustrative sample data", color="#888", fontsize=8.5,
+ax.text(94, 8.5, "real UDISE 2015-16 data", color="#888", fontsize=8.5,
         va="center", ha="right", style="italic")
 
 plt.savefig(OUT / "instagram_post.png", facecolor=CREAM)

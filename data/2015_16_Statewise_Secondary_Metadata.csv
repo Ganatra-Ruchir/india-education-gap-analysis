@@ -1,0 +1,631 @@
+Field name,Description
+statcd,State code
+ac_year,Academic year
+statname,State name
+area_sqkm,Area
+tot_population,Total Population
+urban_population,Urban Population 
+grwoth_rate,Growth Rate
+sexratio,Sex Ratio
+sc_population,% SC Population
+st_population,% St Population
+literacy_rate,literacy rate
+male_literacy_rate,literacy rate- Male
+female_literacy_rate,literacy rate- Female
+distcd,Districts: Districts
+blkcd,Blocks: Blocks
+villages,Villages: Villages
+clusters,clusters: clusters
+schools,schools: schools
+sch_1,Number of Schools: Primary with upper primary and secondary and higher secondary
+sch_2,Number of Schools: Upper Primary with secondary and higher secondary
+sch_3,Number of Schools: Primary with upper primary and secondary
+sch_4,Number of Schools: Upper Primary with secondary
+sch_5,Number of Schools: Secondary only
+sch_6,Number of Schools: Secondary with Hr. Secondary
+sch_7,Number of Schools: Hr. Secondary only
+sch_r_1,Number of Schools- Rural: Primary with upper primary and secondary and higher secondary
+sch_r_2,Number of Schools- Rural: Upper Primary with secondary and higher secondary
+sch_r_3,Number of Schools- Rural: Primary with upper primary and secondary
+sch_r_4,Number of Schools- Rural: Upper Primary with secondary
+sch_r_5,Number of Schools- Rural: Secondary only
+sch_r_6,Number of Schools- Rural: Secondary with Hr. Secondary
+sch_r_7,Number of Schools- Rural: Hr. Secondary only
+sch_u_1,Number of Schools- Urban: Primary with upper primary and secondary and higher secondary
+sch_u_2,Number of Schools- Urban: Upper Primary with secondary and higher secondary
+sch_u_3,Number of Schools- Urban: Primary with upper primary and secondary
+sch_u_4,Number of Schools- Urban: Upper Primary with secondary
+sch_u_5,Number of Schools- Urban: Secondary only
+sch_u_6,Number of Schools- Urban: Secondary with Hr. Secondary
+sch_u_7,Number of Schools- Urban: Hr. Secondary only
+enr_1,Enrolment by school category: Primary with upper primary and secondary and higher secondary
+enr_2,Enrolment by school category: Upper Primary with secondary and higher secondary
+enr_3,Enrolment by school category: Primary with upper primary and secondary
+enr_4,Enrolment by school category: Upper Primary with secondary
+enr_5,Enrolment by school category: Secondary only
+enr_6,Enrolment by school category: Secondary with Hr. Secondary
+enr_7,Enrolment by school category: Hr. Secondary only
+enr_all,Enrolment by school category: All Schools
+enr_r_1,Enrolment by school category- Rural: Primary with upper primary and secondary and higher secondary
+enr_r_2,Enrolment by school category- Rural: Upper Primary with secondary and higher secondary
+enr_r_3,Enrolment by school category- Rural: Primary with upper primary and secondary
+enr_r_4,Enrolment by school category- Rural: Upper Primary with secondary
+enr_r_5,Enrolment by school category- Rural: Secondary only
+enr_r_6,Enrolment by school category- Rural: Secondary with Hr. Secondary
+enr_r_7,Enrolment by school category- Rural: Hr. Secondary only
+enr_r_all,Enrolment by school category- Rural: All Schools
+enr_u_1,Enrolment by school category- Urban: Primary with upper primary and secondary and higher secondary
+enr_u_2,Enrolment by school category- Urban: Upper Primary with secondary and higher secondary
+enr_u_3,Enrolment by school category- Urban: Primary with upper primary and secondary
+enr_u_4,Enrolment by school category- Urban: Upper Primary with secondary
+enr_u_5,Enrolment by school category- Urban: Secondary only
+enr_u_6,Enrolment by school category- Urban: Secondary with Hr. Secondary
+enr_u_7,Enrolment by school category- Urban: Hr. Secondary only
+enr_u_all,Enrolment by school category- Urban: All Schools
+tch_1,Teachers by school category: Primary with upper primary and secondary and higher secondary
+tch_2,Teachers by school category: Upper Primary with secondary and higher secondary
+tch_3,Teachers by school category: Primary with upper primary and secondary
+tch_4,Teachers by school category: Upper Primary with secondary
+tch_5,Teachers by school category: Secondary only
+tch_6,Teachers by school category: Secondary with Hr. Secondary
+tch_7,Teachers by school category: Hr. Secondary only
+tch_all,Teachers by school category: All Schools
+tch_r_1,Teachers by school category- Rural: Primary with upper primary and secondary and higher secondary
+tch_r_2,Teachers by school category- Rural: Upper Primary with secondary and higher secondary
+tch_r_3,Teachers by school category- Rural: Primary with upper primary and secondary
+tch_r_4,Teachers by school category- Rural: Upper Primary with secondary
+tch_r_5,Teachers by school category- Rural: Secondary only
+tch_r_6,Teachers by school category- Rural: Secondary with Hr. Secondary
+tch_r_7,Teachers by school category- Rural: Hr. Secondary only
+tch_r_all,Teachers by school category- Rural: All Schools
+tch_u_1,Teachers by school category- Urban: Primary with upper primary and secondary and higher secondary
+tch_u_2,Teachers by school category- Urban: Upper Primary with secondary and higher secondary
+tch_u_3,Teachers by school category- Urban: Primary with upper primary and secondary
+tch_u_4,Teachers by school category- Urban: Upper Primary with secondary
+tch_u_5,Teachers by school category- Urban: Secondary only
+tch_u_6,Teachers by school category- Urban: Secondary with Hr. Secondary
+tch_u_7,Teachers by school category- Urban: Hr. Secondary only
+tch_u_all,Teachers by school category- Urban: All Schools
+sing_cls_sch_1,Schools with Single Classroom: Primary with upper primary and secondary and higher secondary
+sing_cls_sch_2,Schools with Single Classroom: Upper Primary with secondary and higher secondary
+sing_cls_sch_3,Schools with Single Classroom: Primary with upper primary and secondary
+sing_cls_sch_4,Schools with Single Classroom: Upper Primary with secondary
+sing_cls_sch_5,Schools with Single Classroom: Secondary only
+sing_cls_sch_6,Schools with Single Classroom: Secondary with Hr. Secondary
+sing_cls_sch_7,Schools with Single Classroom: Hr. Secondary only
+sing_cls_sch_all,Schools with Single Classroom: All Schools
+sing_tch_sch_1,Schools with Single Teacher: Primary with upper primary and secondary and higher secondary
+sing_tch_sch_2,Schools with Single Teacher: Upper Primary with secondary and higher secondary
+sing_tch_sch_3,Schools with Single Teacher: Primary with upper primary and secondary
+sing_tch_sch_4,Schools with Single Teacher: Upper Primary with secondary
+sing_tch_sch_5,Schools with Single Teacher: Secondary only
+sing_tch_sch_6,Schools with Single Teacher: Secondary with Hr. Secondary
+sing_tch_sch_7,Schools with Single Teacher: Hr. Secondary only
+sing_tch_sch_all,Schools with Single Teacher: All Schools
+bldg_1,Schools with Building: Primary with upper primary and secondary and higher secondary
+bldg_2,Schools with Building: Upper Primary with secondary and higher secondary
+bldg_3,Schools with Building: Primary with upper primary and secondary
+bldg_4,Schools with Building: Upper Primary with secondary
+bldg_5,Schools with Building: Secondary only
+bldg_6,Schools with Building: Secondary with Hr. Secondary
+bldg_7,Schools with Building: Hr. Secondary only
+bldg_all,Schools with Building: All Schools
+girls_toilet_1,Schools with Girls Toilet: Primary with upper primary and secondary and higher secondary
+girls_toilet_2,Schools with Girls Toilet: Upper Primary with secondary and higher secondary
+girls_toilet_3,Schools with Girls Toilet: Primary with upper primary and secondary
+girls_toilet_4,Schools with Girls Toilet: Upper Primary with secondary
+girls_toilet_5,Schools with Girls Toilet: Secondary only
+girls_toilet_6,Schools with Girls Toilet: Secondary with Hr. Secondary
+girls_toilet_7,Schools with Girls Toilet: Hr. Secondary only
+girls_toilet_all,Schools with Girls Toilet: All Schools
+boys_toilet_1,Schools with Boys Toilet: Primary with upper primary and secondary and higher secondary
+boys_toilet_2,Schools with Boys Toilet: Upper Primary with secondary and higher secondary
+boys_toilet_3,Schools with Boys Toilet: Primary with upper primary and secondary
+boys_toilet_4,Schools with Boys Toilet: Upper Primary with secondary
+boys_toilet_5,Schools with Boys Toilet: Secondary only
+boys_toilet_6,Schools with Boys Toilet: Secondary with Hr. Secondary
+boys_toilet_7,Schools with Boys Toilet: Hr. Secondary only
+boys_toilet_all,Schools with Boys Toilet: All Schools
+gsch_1,Girls Schools: Primary with upper primary and secondary and higher secondary
+gsch_2,Girls Schools: Upper Primary with secondary and higher secondary
+gsch_3,Girls Schools: Primary with upper primary and secondary
+gsch_4,Girls Schools: Upper Primary with secondary
+gsch_5,Girls Schools: Secondary only
+gsch_6,Girls Schools: Secondary with Hr. Secondary
+gsch_7,Girls Schools: Hr. Secondary only
+gsch_all,Girls Schools: All Schools
+bsch_1,Boys Schools: Primary with upper primary and secondary and higher secondary
+bsch_2,Boys Schools: Upper Primary with secondary and higher secondary
+bsch_3,Boys Schools: Primary with upper primary and secondary
+bsch_4,Boys Schools: Upper Primary with secondary
+bsch_5,Boys Schools: Secondary only
+bsch_6,Boys Schools: Secondary with Hr. Secondary
+bsch_7,Boys Schools: Hr. Secondary only
+bsch_all,Boys Schools: All Schools
+co_sch1,Co-Educational Schools: Primary with upper primary and secondary and higher secondary
+co_sch2,Co-Educational Schools: Upper Primary with secondary and higher secondary
+co_sch3,Co-Educational Schools: Primary with upper primary and secondary
+co_sch4,Co-Educational Schools: Upper Primary with secondary
+co_sch5,Co-Educational Schools: Secondary only
+co_sch6,Co-Educational Schools: Secondary with Hr. Secondary
+co_sch7,Co-Educational Schools: Hr. Secondary only
+co_sch_all,Co-Educational Schools: All Schools
+cwsn_toilet_1,Schools with CWSN Toilet: Primary with upper primary and secondary and higher secondary
+cwsn_toilet_2,Schools with CWSN Toilet: Upper Primary with secondary and higher secondary
+cwsn_toilet_3,Schools with CWSN Toilet: Primary with upper primary and secondary
+cwsn_toilet_4,Schools with CWSN Toilet: Upper Primary with secondary
+cwsn_toilet_5,Schools with CWSN Toilet: Secondary only
+cwsn_toilet_6,Schools with CWSN Toilet: Secondary with Hr. Secondary
+cwsn_toilet_7,Schools with CWSN Toilet: Hr. Secondary only
+cwsn_toilet_all,Schools with CWSN Toilet: All Schools
+water_1,Schools with Water: Primary with upper primary and secondary and higher secondary
+water_2,Schools with Water: Upper Primary with secondary and higher secondary
+water_3,Schools with Water: Primary with upper primary and secondary
+water_4,Schools with Water: Upper Primary with secondary
+water_5,Schools with Water: Secondary only
+water_6,Schools with Water: Secondary with Hr. Secondary
+water_7,Schools with Water: Hr. Secondary only
+water_all,Schools with Water: All Schools
+electric_1,Schools with Electricity: Primary with upper primary and secondary and higher secondary
+electric_2,Schools with Electricity: Upper Primary with secondary and higher secondary
+electric_3,Schools with Electricity: Primary with upper primary and secondary
+electric_4,Schools with Electricity: Upper Primary with secondary
+electric_5,Schools with Electricity: Secondary only
+electric_6,Schools with Electricity: Secondary with Hr. Secondary
+electric_7,Schools with Electricity: Hr. Secondary only
+electric_all,Schools with Electricity: All Schools
+rampneed_1,Schools which required Ramps: Primary with upper primary and secondary and higher secondary
+rampneed_2,Schools which required Ramps: Upper Primary with secondary and higher secondary
+rampneed_3,Schools which required Ramps: Primary with upper primary and secondary
+rampneed_4,Schools which required Ramps: Upper Primary with secondary
+rampneed_5,Schools which required Ramps: Secondary only
+rampneed_6,Schools which required Ramps: Secondary with Hr. Secondary
+rampneed_7,Schools which required Ramps: Hr. Secondary only
+rampneed_all,Schools which required Ramps: All Schools
+ramps_1,Schools with Ramps: Primary with upper primary and secondary and higher secondary
+ramps_2,Schools with Ramps: Upper Primary with secondary and higher secondary
+ramps_3,Schools with Ramps: Primary with upper primary and secondary
+ramps_4,Schools with Ramps: Upper Primary with secondary
+ramps_5,Schools with Ramps: Secondary only
+ramps_6,Schools with Ramps: Secondary with Hr. Secondary
+ramps_7,Schools with Ramps: Hr. Secondary only
+ramps_all,Schools with Ramps: All Schools
+library_1,Schools with Library: Primary with upper primary and secondary and higher secondary
+library_2,Schools with Library: Upper Primary with secondary and higher secondary
+library_3,Schools with Library: Primary with upper primary and secondary
+library_4,Schools with Library: Upper Primary with secondary
+library_5,Schools with Library: Secondary only
+library_6,Schools with Library: Secondary with Hr. Secondary
+library_7,Schools with Library: Hr. Secondary only
+library_all,Schools with Library: All Schools
+librarian_1,Schools with Librarian: Primary with upper primary and secondary and higher secondary
+librarian_2,Schools with Librarian: Upper Primary with secondary and higher secondary
+librarian_3,Schools with Librarian: Primary with upper primary and secondary
+librarian_4,Schools with Librarian: Upper Primary with secondary
+librarian_5,Schools with Librarian: Secondary only
+librarian_6,Schools with Librarian: Secondary with Hr. Secondary
+librarian_7,Schools with Librarian: Hr. Secondary only
+librarian_all,Schools with Librarian: All Schools
+bndrywall_1,Schools with Boundary wall: Primary with upper primary and secondary and higher secondary
+bndrywall_2,Schools with Boundary wall: Upper Primary with secondary and higher secondary
+bndrywall_3,Schools with Boundary wall: Primary with upper primary and secondary
+bndrywall_4,Schools with Boundary wall: Upper Primary with secondary
+bndrywall_5,Schools with Boundary wall: Secondary only
+bndrywall_6,Schools with Boundary wall: Secondary with Hr. Secondary
+bndrywall_7,Schools with Boundary wall: Hr. Secondary only
+bndrywall_all,Schools with Boundary wall: All Schools
+cwsn_sch_1,Number of Special Schools for CWSN : Primary with upper primary and secondary and higher secondary
+cwsn_sch_2,Number of Special Schools for CWSN : Upper Primary with secondary and higher secondary
+cwsn_sch_3,Number of Special Schools for CWSN : Primary with upper primary and secondary
+cwsn_sch_4,Number of Special Schools for CWSN : Upper Primary with secondary
+cwsn_sch_5,Number of Special Schools for CWSN : Secondary only
+cwsn_sch_6,Number of Special Schools for CWSN : Secondary with Hr. Secondary
+cwsn_sch_7,Number of Special Schools for CWSN : Hr. Secondary only
+cwsn_sch_all,Number of Special Schools for CWSN : All Schools
+lab_asst_1,Schools with Lab Assistant: Primary with upper primary and secondary and higher secondary
+lab_asst_2,Schools with Lab Assistant: Upper Primary with secondary and higher secondary
+lab_asst_3,Schools with Lab Assistant: Primary with upper primary and secondary
+lab_asst_4,Schools with Lab Assistant: Upper Primary with secondary
+lab_asst_5,Schools with Lab Assistant: Secondary only
+lab_asst_6,Schools with Lab Assistant: Secondary with Hr. Secondary
+lab_asst_7,Schools with Lab Assistant: Hr. Secondary only
+lab_asst_all,Schools with Lab Assistant: All Schools
+hmroom_1,Schools with Separate room for Headmaster: Primary with upper primary and secondary and higher secondary
+hmroom_2,Schools with Separate room for Headmaster: Upper Primary with secondary and higher secondary
+hmroom_3,Schools with Separate room for Headmaster: Primary with upper primary and secondary
+hmroom_4,Schools with Separate room for Headmaster: Upper Primary with secondary
+hmroom_5,Schools with Separate room for Headmaster: Secondary only
+hmroom_6,Schools with Separate room for Headmaster: Secondary with Hr. Secondary
+hmroom_7,Schools with Separate room for Headmaster: Hr. Secondary only
+hmroom_all,Schools with Separate room for Headmaster: All Schools
+hostel_boys_1,Schools with Girls Hostel: Primary with upper primary and secondary and higher secondary
+hostel_boys_2,Schools with Girls Hostel: Upper Primary with secondary and higher secondary
+hostel_boys_3,Schools with Girls Hostel: Primary with upper primary and secondary
+hostel_boys_4,Schools with Girls Hostel: Upper Primary with secondary
+hostel_boys_5,Schools with Girls Hostel: Secondary only
+hostel_boys_6,Schools with Girls Hostel: Secondary with Hr. Secondary
+hostel_boys_7,Schools with Girls Hostel: Hr. Secondary only
+hostel_boys_all,Schools with Girls Hostel: All Schools
+hostel_girls_1,Schools with Boys Hostel: Primary with upper primary and secondary and higher secondary
+hostel_girls_2,Schools with Boys Hostel: Upper Primary with secondary and higher secondary
+hostel_girls_3,Schools with Boys Hostel: Primary with upper primary and secondary
+hostel_girls_4,Schools with Boys Hostel: Upper Primary with secondary
+hostel_girls_5,Schools with Boys Hostel: Secondary only
+hostel_girls_6,Schools with Boys Hostel: Secondary with Hr. Secondary
+hostel_girls_7,Schools with Boys Hostel: Hr. Secondary only
+hostel_girls_all,Schools with Boys Hostel: All Schools
+internet_1,Schools with Internet: Primary with upper primary and secondary and higher secondary
+internet_2,Schools with Internet: Upper Primary with secondary and higher secondary
+internet_3,Schools with Internet: Primary with upper primary and secondary
+internet_4,Schools with Internet: Upper Primary with secondary
+internet_5,Schools with Internet: Secondary only
+internet_6,Schools with Internet: Secondary with Hr. Secondary
+internet_7,Schools with Internet: Hr. Secondary only
+internet_all,Schools with Internet: All Schools
+ict_lab_1,Schools with ICT Lab: Primary with upper primary and secondary and higher secondary
+ict_lab_2,Schools with ICT Lab: Upper Primary with secondary and higher secondary
+ict_lab_3,Schools with ICT Lab: Primary with upper primary and secondary
+ict_lab_4,Schools with ICT Lab: Upper Primary with secondary
+ict_lab_5,Schools with ICT Lab: Secondary only
+ict_lab_6,Schools with ICT Lab: Secondary with Hr. Secondary
+ict_lab_7,Schools with ICT Lab: Hr. Secondary only
+ict_lab_all,Schools with ICT Lab: All Schools
+pground_1,Schools with Playground: Primary with upper primary and secondary and higher secondary
+pground_2,Schools with Playground: Upper Primary with secondary and higher secondary
+pground_3,Schools with Playground: Primary with upper primary and secondary
+pground_4,Schools with Playground: Upper Primary with secondary
+pground_5,Schools with Playground: Secondary only
+pground_6,Schools with Playground: Secondary with Hr. Secondary
+pground_7,Schools with Playground: Hr. Secondary only
+pground_all,Schools with Playground: All Schools
+medchk_1,Schools conducted Medical Checkup in Previous Year: Primary with upper primary and secondary and higher secondary
+medchk_2,Schools conducted Medical Checkup in Previous Year: Upper Primary with secondary and higher secondary
+medchk_3,Schools conducted Medical Checkup in Previous Year: Primary with upper primary and secondary
+medchk_4,Schools conducted Medical Checkup in Previous Year: Upper Primary with secondary
+medchk_5,Schools conducted Medical Checkup in Previous Year: Secondary only
+medchk_6,Schools conducted Medical Checkup in Previous Year: Secondary with Hr. Secondary
+medchk_7,Schools conducted Medical Checkup in Previous Year: Hr. Secondary only
+medchk_all,Schools conducted Medical Checkup in Previous Year: All Schools
+smdc_1,Schools with SMDC: Primary with upper primary and secondary and higher secondary
+smdc_2,Schools with SMDC: Upper Primary with secondary and higher secondary
+smdc_3,Schools with SMDC: Primary with upper primary and secondary
+smdc_4,Schools with SMDC: Upper Primary with secondary
+smdc_5,Schools with SMDC: Secondary only
+smdc_6,Schools with SMDC: Secondary with Hr. Secondary
+smdc_7,Schools with SMDC: Hr. Secondary only
+smdc_all,Schools with SMDC: All Schools
+sch_bld_com_1,Schools with School Building Committee: Primary with upper primary and secondary and higher secondary
+sch_bld_com_2,Schools with School Building Committee: Upper Primary with secondary and higher secondary
+sch_bld_com_3,Schools with School Building Committee: Primary with upper primary and secondary
+sch_bld_com_4,Schools with School Building Committee: Upper Primary with secondary
+sch_bld_com_5,Schools with School Building Committee: Secondary only
+sch_bld_com_6,Schools with School Building Committee: Secondary with Hr. Secondary
+sch_bld_com_7,Schools with School Building Committee: Hr. Secondary only
+sch_bld_com_all,Schools with School Building Committee: All Schools
+pta_1,Schools with PTA: Primary with upper primary and secondary and higher secondary
+pta_2,Schools with PTA: Upper Primary with secondary and higher secondary
+pta_3,Schools with PTA: Primary with upper primary and secondary
+pta_4,Schools with PTA: Upper Primary with secondary
+pta_5,Schools with PTA: Secondary only
+pta_6,Schools with PTA: Secondary with Hr. Secondary
+pta_7,Schools with PTA: Hr. Secondary only
+pta_all,Schools with PTA: All Schools
+sch_2006_1,Schools established since 2006: Primary with upper primary and secondary and higher secondary
+sch_2006_2,Schools established since 2006: Upper Primary with secondary and higher secondary
+sch_2006_3,Schools established since 2006: Primary with upper primary and secondary
+sch_2006_4,Schools established since 2006: Upper Primary with secondary
+sch_2006_5,Schools established since 2006: Secondary only
+sch_2006_6,Schools established since 2006: Secondary with Hr. Secondary
+sch_2006_7,Schools established since 2006: Hr. Secondary only
+sch_2006_all,Schools established since 2006: All Schools
+cls_1,Classrooms in Schools: Primary with upper primary and secondary and higher secondary
+cls_2,Classrooms in Schools: Upper Primary with secondary and higher secondary
+cls_3,Classrooms in Schools: Primary with upper primary and secondary
+cls_4,Classrooms in Schools: Upper Primary with secondary
+cls_5,Classrooms in Schools: Secondary only
+cls_6,Classrooms in Schools: Secondary with Hr. Secondary
+cls_7,Classrooms in Schools: Hr. Secondary only
+cls_all,Classrooms in Schools: All Schools
+tchf_1,Total number of Female Teachers: Primary with upper primary and secondary and higher secondary
+tchf_2,Total number of Female Teachers: Upper Primary with secondary and higher secondary
+tchf_3,Total number of Female Teachers: Primary with upper primary and secondary
+tchf_4,Total number of Female Teachers: Upper Primary with secondary
+tchf_5,Total number of Female Teachers: Secondary only
+tchf_6,Total number of Female Teachers: Secondary with Hr. Secondary
+tchf_7,Total number of Female Teachers: Hr. Secondary only
+tchf_all,Total number of Female Teachers: All Schools
+enrg_1,Girls Enrolment: Primary with upper primary and secondary and higher secondary
+enrg_2,Girls Enrolment: Upper Primary with secondary and higher secondary
+enrg_3,Girls Enrolment: Primary with upper primary and secondary
+enrg_4,Girls Enrolment: Upper Primary with secondary
+enrg_5,Girls Enrolment: Secondary only
+enrg_6,Girls Enrolment: Secondary with Hr. Secondary
+enrg_7,Girls Enrolment: Hr. Secondary only
+enrg_all,Girls Enrolment: All Schools
+enrc8_b,Enrolment in Current year by Class: Enrolment in Current year by Class-Class 8 - Boys
+enrc8_g,Enrolment in Current year by Class: Enrolment in Current year by Class-Class 8 - Girls
+enrc9_b,Enrolment in Current year by Class: Enrolment in Current year by Class-Class 9 - Boys
+enrc9_g,Enrolment in Current year by Class: Enrolment in Current year by Class-Class 9 - Girls
+enrc10_b,Enrolment in Current year by Class: Enrolment in Current year by Class-Class 10 - Boys
+enrc10_g,Enrolment in Current year by Class: Enrolment in Current year by Class-Class 10 - Girls
+enrc11_b,Enrolment in Current year by Class: Enrolment in Current year by Class-Class 11 - Boys
+enrc11_g,Enrolment in Current year by Class: Enrolment in Current year by Class-Class 11 - Girls
+enrc12_b,Enrolment in Current year by Class: Enrolment in Current year by Class-Class 12 - Boys
+enrc12_g,Enrolment in Current year by Class: Enrolment in Current year by Class-Class 12 - Girls
+repc8_b,Repeaters in Current year by Class: Repeaters in Current year by Class-Class 8 - Boys
+repc8_g,Repeaters in Current year by Class: Repeaters in Current year by Class-Class 8 - Girls
+repc9_b,Repeaters in Current year by Class: Repeaters in Current year by Class-Class 9 - Boys
+repc9_g,Repeaters in Current year by Class: Repeaters in Current year by Class-Class 9 - Girls
+repc10_b,Repeaters in Current year by Class: Repeaters in Current year by Class-Class 10 - Boys
+repc10_g,Repeaters in Current year by Class: Repeaters in Current year by Class-Class 10 - Girls
+repc11_b,Repeaters in Current year by Class: Repeaters in Current year by Class-Class 11 - Boys
+repc11_g,Repeaters in Current year by Class: Repeaters in Current year by Class-Class 11 - Girls
+repc12_b,Repeaters in Current year by Class: Repeaters in Current year by Class-Class 12 - Boys
+repc12_g,Repeaters in Current year by Class: Repeaters in Current year by Class-Class 12 - Girls
+cwsnc8_b,CWSN in Current year by Class: CWSN in Current year by Class-Class 8 - Boys
+cwsnc8_g,CWSN in Current year by Class: CWSN in Current year by Class-Class 8 - Girls
+cwsnc9_b,CWSN in Current year by Class: CWSN in Current year by Class-Class 9 - Boys
+cwsnc9_g,CWSN in Current year by Class: CWSN in Current year by Class-Class 9 - Girls
+cwsnc10_b,CWSN in Current year by Class: CWSN in Current year by Class-Class 10 - Boys
+cwsnc10_g,CWSN in Current year by Class: CWSN in Current year by Class-Class 10 - Girls
+cwsnc11_b,CWSN in Current year by Class: CWSN in Current year by Class-Class 11 - Boys
+cwsnc11_g,CWSN in Current year by Class: CWSN in Current year by Class-Class 11 - Girls
+cwsnc12_b,CWSN in Current year by Class: CWSN in Current year by Class-Class 12 - Boys
+cwsnc12_g,CWSN in Current year by Class: CWSN in Current year by Class-Class 12 - Girls
+schlabphy,Hr Secondary Schools with Laboratory: Hr Secondary Schools with Laboratory-Hr Secondary Schools with Laboratory - Physics
+schlabchem,Hr Secondary Schools with Laboratory: Hr Secondary Schools with Laboratory-Hr Secondary Schools with Laboratory - Chemistry
+schlabbio,Hr Secondary Schools with Laboratory: Hr Secondary Schools with Laboratory-Hr Secondary Schools with Laboratory - Biology
+schlabcomputer,Hr Secondary Schools with Laboratory: Hr Secondary Schools with Laboratory-Hr Secondary Schools with Laboratory - Computer
+schlabmath,Hr Secondary Schools with Laboratory: Hr Secondary Schools with Laboratory-Hr Secondary Schools with Laboratory - Maths
+schlablang,Hr Secondary Schools with Laboratory: Hr Secondary Schools with Laboratory-Hr Secondary Schools with Laboratory - Language
+schlabgeo,Hr Secondary Schools with Laboratory: Hr Secondary Schools with Laboratory-Hr Secondary Schools with Laboratory - Geography
+schlabpsyc,Hr Secondary Schools with Laboratory: Hr Secondary Schools with Laboratory-Hr Secondary Schools with Laboratory - Psychology
+schlabhsci,Hr Secondary Schools with Laboratory: Hr Secondary Schools with Laboratory-Hr Secondary Schools with Laboratory - H. Science
+scsec,SC enrolment: Secondary-Secondary - Total
+scsec_g,SC enrolment: Secondary-Secondary - Girls
+schsec,SC enrolment: Hr Secondary-Hr Secondary - Total
+schsec_g,SC enrolment: Hr Secondary-Hr Secondary - Girls
+stsec,ST enrolment: Secondary-Secondary - Total
+stsec_g,ST enrolment: Secondary-Secondary - Girls
+sthsec,ST enrolment: Hr Secondary-Hr Secondary - Total
+sthsec_g,ST enrolment: Hr Secondary-Hr Secondary - Girls
+obcsec,OBC enrolment: Secondary-Secondary - Total
+obcsec_g,OBC enrolment: Secondary-Secondary - Girls
+obchsec,OBC enrolment: Hr Secondary-Hr Secondary - Total
+obchsec_g,OBC enrolment: Hr Secondary-Hr Secondary - Girls
+muslim_sec,Muslim enrolment: Secondary-Secondary - Total
+muslim_sec_g,Muslim enrolment: Secondary-Secondary - Girls
+muslim_hsec,Muslim enrolment: Hr Secondary-Hr Secondary - Total
+muslim_hsec_g,Muslim enrolment: Hr Secondary-Hr Secondary - Girls
+clgood_sec,Classroom by Condition: Secondary-Secondary - Good Condition 
+clmajor_sec,Classroom by Condition: Secondary-Secondary - Need Major Repair 
+clminor_sec,Classroom by Condition: Secondary-Secondary - Need Minor Repair 
+clgood_hsec,Classroom by Condition: Hr Secondary-Hr Secondary - Good Condition 
+clmajor_hsec,Classroom by Condition: Hr Secondary-Hr Secondary - Need Major Repair 
+clminor_hsec,Classroom by Condition: Hr Secondary-Hr Secondary - Need Minor Repair 
+boys_b13_c8,Enrolment by Age and Class Secondary: Below 13 Yrs-Class 8 - Boys
+girls_b13_c8,Enrolment by Age and Class Secondary: Below 13 Yrs-Class 8 - Girls
+boys_b13_c9,Enrolment by Age and Class Secondary: Below 13 Yrs-Class 9 - Boys
+girls_b13_c9,Enrolment by Age and Class Secondary: Below 13 Yrs-Class 9 - Girls
+boys_b13_c10,Enrolment by Age and Class Secondary: Below 13 Yrs-Class 10 - Boys
+girls_b13_c10,Enrolment by Age and Class Secondary: Below 13 Yrs-Class 10 - Girls
+boys_13_c8,Enrolment by Age and Class Secondary:  13 Yrs-Class 8 - Boys
+girls_13_c8,Enrolment by Age and Class Secondary:  13 Yrs-Class 8 - Girls
+boys_13_c9,Enrolment by Age and Class Secondary:  13 Yrs-Class 9 - Boys
+girls_13_c9,Enrolment by Age and Class Secondary:  13 Yrs-Class 9 - Girls
+boys_13_c10,Enrolment by Age and Class Secondary:  13 Yrs-Class 10 - Boys
+girls_13_c10,Enrolment by Age and Class Secondary:  13 Yrs-Class 10 - Girls
+boys_14_c8,Enrolment by Age and Class Secondary:  14 Yrs-Class 8 - Boys
+girls_14_c8,Enrolment by Age and Class Secondary:  14 Yrs-Class 8 - Girls
+boys_14_c9,Enrolment by Age and Class Secondary:  14 Yrs-Class 9 - Boys
+girls_14_c9,Enrolment by Age and Class Secondary:  14 Yrs-Class 9 - Girls
+boys_14_c10,Enrolment by Age and Class Secondary:  14 Yrs-Class 10 - Boys
+girls_14_c10,Enrolment by Age and Class Secondary:  14 Yrs-Class 10 - Girls
+boys_15_c8,Enrolment by Age and Class Secondary:  15 Yrs-Class 8 - Boys
+girls_15_c8,Enrolment by Age and Class Secondary:  15 Yrs-Class 8 - Girls
+boys_15_c9,Enrolment by Age and Class Secondary:  15 Yrs-Class 9 - Boys
+girls_15_c9,Enrolment by Age and Class Secondary:  15 Yrs-Class 9 - Girls
+boys_15_c10,Enrolment by Age and Class Secondary:  15 Yrs-Class 10 - Boys
+girls_15_c10,Enrolment by Age and Class Secondary:  15 Yrs-Class 10 - Girls
+boys_a15_c8,Enrolment by Age and Class Secondary: Above 15  Yrs-Class 8 - Boys
+girls_a15_c8,Enrolment by Age and Class Secondary: Above 15  Yrs-Class 8 - Girls
+boys_a15_c9,Enrolment by Age and Class Secondary: Above 15  Yrs-Class 9 - Boys
+girls_a15_c9,Enrolment by Age and Class Secondary: Above 15  Yrs-Class 9 - Girls
+boys_a15_c10,Enrolment by Age and Class Secondary: Above 15  Yrs-Class 10 - Boys
+girls_a15_c10,Enrolment by Age and Class Secondary: Above 15  Yrs-Class 10 - Girls
+boys_b15_c11,Enrolment by Age and Class Higher Secondary: Below 15 Yrs-Class 11 - Boys
+girls_b15_c11,Enrolment by Age and Class Higher Secondary: Below 15 Yrs-Class 11 - Girls
+boys_b15_c12,Enrolment by Age and Class Higher Secondary: Below 15 Yrs-Class 12 - Boys
+girls_b15_c12,Enrolment by Age and Class Higher Secondary: Below 15 Yrs-Class 12 - Girls
+boys_15_c11,Enrolment by Age and Class Higher Secondary:  15 Yrs-Class 11 - Boys
+girls_15_c11,Enrolment by Age and Class Higher Secondary:  15 Yrs-Class 11 - Girls
+boys_15_c12,Enrolment by Age and Class Higher Secondary:  15 Yrs-Class 12 - Boys
+girls_15_c12,Enrolment by Age and Class Higher Secondary:  15 Yrs-Class 12 - Girls
+boys_16_c11,Enrolment by Age and Class Higher Secondary:  16 Yrs-Class 11 - Boys
+girls_16_c11,Enrolment by Age and Class Higher Secondary:  16 Yrs-Class 11 - Girls
+boys_16_c12,Enrolment by Age and Class Higher Secondary:  16 Yrs-Class 12 - Boys
+girls_16_c12,Enrolment by Age and Class Higher Secondary:  16 Yrs-Class 12 - Girls
+boys_17_c11,Enrolment by Age and Class Higher Secondary:  17 Yrs-Class 11 - Boys
+girls_17_c11,Enrolment by Age and Class Higher Secondary:  17 Yrs-Class 11 - Girls
+boys_17_c12,Enrolment by Age and Class Higher Secondary:  17 Yrs-Class 12 - Boys
+girls_17_c12,Enrolment by Age and Class Higher Secondary:  17 Yrs-Class 12 - Girls
+boys_a17_c11,Enrolment by Age and Class Higher Secondary:  Above 17 Yrs-Class 11 - Boys
+girls_a17_c11,Enrolment by Age and Class Higher Secondary:  Above 17 Yrs-Class 11 - Girls
+boys_a17_c12,Enrolment by Age and Class Higher Secondary:  Above 17 Yrs-Class 12 - Boys
+girls_a17_c12,Enrolment by Age and Class Higher Secondary:  Above 17 Yrs-Class 12 - Girls
+apr_b_gen_py10,Examination Result Secondary: Number of students Appeared in Previous Year-General - Boys
+apr_g_gen_py10,Examination Result Secondary: Number of students Appeared in Previous Year-General - Girls
+apr_b_sc_py10,Examination Result Secondary: Number of students Appeared in Previous Year-SC - Boys
+apr_g_sc_py10,Examination Result Secondary: Number of students Appeared in Previous Year-SC - Girls
+apr_b_st_py10,Examination Result Secondary: Number of students Appeared in Previous Year-ST - Boys
+apr_g_st_py10,Examination Result Secondary: Number of students Appeared in Previous Year-ST - Girls
+apr_b_obc_py10,Examination Result Secondary: Number of students Appeared in Previous Year-OBC - Boys
+apr_g_obc_py10,Examination Result Secondary: Number of students Appeared in Previous Year-OBC - Girls
+pass_b_gen_py10,Examination Result Secondary: Number of students Passed in Previous Year-General - Boys
+pass_g_gen_py10,Examination Result Secondary: Number of students Passed in Previous Year-General - Girls
+pass_b_sc_py10,Examination Result Secondary: Number of students Passed in Previous Year-SC - Boys
+pass_g_sc_py10,Examination Result Secondary: Number of students Passed in Previous Year-SC - Girls
+pass_b_st_py10,Examination Result Secondary: Number of students Passed in Previous Year-ST - Boys
+pass_g_st_py10,Examination Result Secondary: Number of students Passed in Previous Year-ST - Girls
+pass_b_obc_py10,Examination Result Secondary: Number of students Passed in Previous Year-OBC - Boys
+pass_g_obc_py10,Examination Result Secondary: Number of students Passed in Previous Year-OBC - Girls
+arts_c11_b,Enrolment By Stream and Grade: Enrolment By Stream and Grade-Class 11 Boys - Arts
+sci_c11_b,Enrolment By Stream and Grade: Enrolment By Stream and Grade-Class 11 Boys - Science
+com_c11_b,Enrolment By Stream and Grade: Enrolment By Stream and Grade-Class 11 Boys - Commerce
+voc_c11_b,Enrolment By Stream and Grade: Enrolment By Stream and Grade-Class 11 Boys - Vocational
+oth_c11_b,Enrolment By Stream and Grade: Enrolment By Stream and Grade-Class 11 Boys - Others
+arts_c11_g,Enrolment By Stream and Grade: Enrolment By Stream and Grade-Class 11 Girls - Arts
+sci_c11_g,Enrolment By Stream and Grade: Enrolment By Stream and Grade-Class 11 Girls - Science
+com_c11_g,Enrolment By Stream and Grade: Enrolment By Stream and Grade-Class 11 Girls - Commerce
+voc_c11_g,Enrolment By Stream and Grade: Enrolment By Stream and Grade-Class 11 Girls - Vocational
+oth_c11_g,Enrolment By Stream and Grade: Enrolment By Stream and Grade-Class 11 Girls - Others
+arts_c12_b,Enrolment By Stream and Grade: Enrolment By Stream and Grade-Class 12 Boys - Arts
+sci_c12_b,Enrolment By Stream and Grade: Enrolment By Stream and Grade-Class 12 Boys - Science
+com_c12_b,Enrolment By Stream and Grade: Enrolment By Stream and Grade-Class 12 Boys - Commerce
+voc_c12_b,Enrolment By Stream and Grade: Enrolment By Stream and Grade-Class 12 Boys - Vocational
+oth_c12_b,Enrolment By Stream and Grade: Enrolment By Stream and Grade-Class 12 Boys - Others
+arts_c12_g,Enrolment By Stream and Grade: Enrolment By Stream and Grade-Class 12 Girls - Arts
+sci_c12_g,Enrolment By Stream and Grade: Enrolment By Stream and Grade-Class 12 Girls - Science
+com_c12_g,Enrolment By Stream and Grade: Enrolment By Stream and Grade-Class 12 Girls - Commerce
+voc_c12_g,Enrolment By Stream and Grade: Enrolment By Stream and Grade-Class 12 Girls - Vocational
+oth_c12_g,Enrolment By Stream and Grade: Enrolment By Stream and Grade-Class 12 Girls - Others
+apr_arts_gen_b,Examination Results by Stream: Arts-Number of Students Appeared - Boys 
+apr_arts_gen_g,Examination Results by Stream: Arts-Number of Students Appeared - Girls
+apr_arts_sc_b,Examination Results by Stream: Arts-Number of Students Appeared - Boys 
+apr_arts_sc_g,Examination Results by Stream: Arts-Number of Students Appeared - Girls
+apr_arts_st_b,Examination Results by Stream: Arts-Number of Students Appeared - Boys 
+apr_arts_st_g,Examination Results by Stream: Arts-Number of Students Appeared - Girls
+apr_arts_obc_b,Examination Results by Stream: Arts-Number of Students Appeared - Boys 
+apr_arts_obc_g,Examination Results by Stream: Arts-Number of Students Appeared - Girls
+pass_arts_gen_b,Examination Results by Stream: Arts-Number of Students Passed - Boys 
+pass_arts_gen_g,Examination Results by Stream: Arts-Number of Students Passed - Girls
+pass_arts_sc_b,Examination Results by Stream: Arts-Number of Students Passed - Boys 
+pass_arts_sc_g,Examination Results by Stream: Arts-Number of Students Passed - Girls
+pass_arts_st_b,Examination Results by Stream: Arts-Number of Students Passed - Boys 
+pass_arts_st_g,Examination Results by Stream: Arts-Number of Students Passed - Girls
+pass_arts_obc_b,Examination Results by Stream: Arts-Number of Students Passed - Boys 
+pass_arts_obc_g,Examination Results by Stream: Arts-Number of Students Passed - Girls
+apr_sci_gen_b,Examination Results by Stream: Science-Number of Students Appeared - Boys 
+apr_sci_gen_g,Examination Results by Stream: Science-Number of Students Appeared - Girls
+apr_sci_sc_b,Examination Results by Stream: Science-Number of Students Appeared - Boys 
+apr_sci_sc_g,Examination Results by Stream: Science-Number of Students Appeared - Girls
+apr_sci_st_b,Examination Results by Stream: Science-Number of Students Appeared - Boys 
+apr_sci_st_g,Examination Results by Stream: Science-Number of Students Appeared - Girls
+apr_sci_obc_b,Examination Results by Stream: Science-Number of Students Appeared - Boys 
+apr_sci_obc_g,Examination Results by Stream: Science-Number of Students Appeared - Girls
+pass_sci_gen_b,Examination Results by Stream: Science-Number of Students Passed - Boys 
+pass_sci_gen_g,Examination Results by Stream: Science-Number of Students Passed - Girls
+pass_sci_sc_b,Examination Results by Stream: Science-Number of Students Passed - Boys 
+pass_sci_sc_g,Examination Results by Stream: Science-Number of Students Passed - Girls
+pass_sci_st_b,Examination Results by Stream: Science-Number of Students Passed - Boys 
+pass_sci_st_g,Examination Results by Stream: Science-Number of Students Passed - Girls
+pass_sci_obc_b,Examination Results by Stream: Science-Number of Students Passed - Boys 
+pass_sci_obc_g,Examination Results by Stream: Science-Number of Students Passed - Girls
+apr_com_gen_b,Examination Results by Stream: Commerce-Number of Students Appeared - Boys 
+apr_com_gen_g,Examination Results by Stream: Commerce-Number of Students Appeared - Girls
+apr_com_sc_b,Examination Results by Stream: Commerce-Number of Students Appeared - Boys 
+apr_com_sc_g,Examination Results by Stream: Commerce-Number of Students Appeared - Girls
+apr_com_st_b,Examination Results by Stream: Commerce-Number of Students Appeared - Boys 
+apr_com_st_g,Examination Results by Stream: Commerce-Number of Students Appeared - Girls
+apr_com_obc_b,Examination Results by Stream: Commerce-Number of Students Appeared - Boys 
+apr_com_obc_g,Examination Results by Stream: Commerce-Number of Students Appeared - Girls
+pass_com_gen_b,Examination Results by Stream: Commerce-Number of Students Passed - Boys 
+pass_com_gen_g,Examination Results by Stream: Commerce-Number of Students Passed - Girls
+pass_com_sc_b,Examination Results by Stream: Commerce-Number of Students Passed - Boys 
+pass_com_sc_g,Examination Results by Stream: Commerce-Number of Students Passed - Girls
+pass_com_st_b,Examination Results by Stream: Commerce-Number of Students Passed - Boys 
+pass_com_st_g,Examination Results by Stream: Commerce-Number of Students Passed - Girls
+pass_com_obc_b,Examination Results by Stream: Commerce-Number of Students Passed - Boys 
+pass_com_obc_g,Examination Results by Stream: Commerce-Number of Students Passed - Girls
+apr_voc_gen_b,Examination Results by Stream: Vocational -Number of Students Appeared - Boys 
+apr_voc_gen_g,Examination Results by Stream: Vocational -Number of Students Appeared - Girls
+apr_voc_sc_b,Examination Results by Stream: Vocational -Number of Students Appeared - Boys 
+apr_voc_sc_g,Examination Results by Stream: Vocational -Number of Students Appeared - Girls
+apr_voc_st_b,Examination Results by Stream: Vocational -Number of Students Appeared - Boys 
+apr_voc_st_g,Examination Results by Stream: Vocational -Number of Students Appeared - Girls
+apr_voc_obc_b,Examination Results by Stream: Vocational -Number of Students Appeared - Boys 
+apr_voc_obc_g,Examination Results by Stream: Vocational -Number of Students Appeared - Girls
+pass_voc_gen_b,Examination Results by Stream: Vocational -Number of Students Passed - Boys 
+pass_voc_gen_g,Examination Results by Stream: Vocational -Number of Students Passed - Girls
+pass_voc_sc_b,Examination Results by Stream: Vocational -Number of Students Passed - Boys 
+pass_voc_sc_g,Examination Results by Stream: Vocational -Number of Students Passed - Girls
+pass_voc_st_b,Examination Results by Stream: Vocational -Number of Students Passed - Boys 
+pass_voc_st_g,Examination Results by Stream: Vocational -Number of Students Passed - Girls
+pass_voc_obc_b,Examination Results by Stream: Vocational -Number of Students Passed - Boys 
+pass_voc_obc_g,Examination Results by Stream: Vocational -Number of Students Passed - Girls
+apr_oth_gen_b,Examination Results by Stream: Other-Number of Students Appeared - Boys 
+apr_oth_gen_g,Examination Results by Stream: Other-Number of Students Appeared - Girls
+apr_oth_sc_b,Examination Results by Stream: Other-Number of Students Appeared - Boys 
+apr_oth_sc_g,Examination Results by Stream: Other-Number of Students Appeared - Girls
+apr_oth_st_b,Examination Results by Stream: Other-Number of Students Appeared - Boys 
+apr_oth_st_g,Examination Results by Stream: Other-Number of Students Appeared - Girls
+apr_oth_obc_b,Examination Results by Stream: Other-Number of Students Appeared - Boys 
+apr_oth_obc_g,Examination Results by Stream: Other-Number of Students Appeared - Girls
+pass_oth_gen_b,Examination Results by Stream: Other-Number of Students Passed - Boys 
+pass_oth_gen_g,Examination Results by Stream: Other-Number of Students Passed - Girls
+pass_oth_sc_b,Examination Results by Stream: Other-Number of Students Passed - Boys 
+pass_oth_sc_g,Examination Results by Stream: Other-Number of Students Passed - Girls
+pass_oth_st_b,Examination Results by Stream: Other-Number of Students Passed - Boys 
+pass_oth_st_g,Examination Results by Stream: Other-Number of Students Passed - Girls
+pass_oth_obc_b,Examination Results by Stream: Other-Number of Students Passed - Boys 
+pass_oth_obc_g,Examination Results by Stream: Other-Number of Students Passed - Girls
+tchug_r_m,Teachers by Educational Qualification: Regular teachers-Male - Below Graduate
+tchgrad_r_m,Teachers by Educational Qualification: Regular teachers-Male - Graduate
+tchpg_r_m,Teachers by Educational Qualification: Regular teachers-Male - Post Graduate
+tchphd_r_m,Teachers by Educational Qualification: Regular teachers-Male - PhD
+tchpd_r_m,Teachers by Educational Qualification: Regular teachers-Male - Post-Doctoral
+tchnr_r_m,Teachers by Educational Qualification: Regular teachers-Male - No Response/ None
+tchug_r_f,Teachers by Educational Qualification: Regular teachers-Female - Below Graduate
+tchgrad_r_f,Teachers by Educational Qualification: Regular teachers-Female - Graduate
+tchpg_r_f,Teachers by Educational Qualification: Regular teachers-Female - Post Graduate
+tchphd_r_f,Teachers by Educational Qualification: Regular teachers-Female - PhD
+tchpd_r_f,Teachers by Educational Qualification: Regular teachers-Female - Post-Doctoral
+tchnr_r_f,Teachers by Educational Qualification: Regular teachers-Female - No Response/ None
+tchug_r_nr,Teachers by Educational Qualification: Regular teachers-No Response in Gender - Below Graduate
+tchgrad_r_nr,Teachers by Educational Qualification: Regular teachers-No Response in Gender - Graduate
+tchpg_r_nr,Teachers by Educational Qualification: Regular teachers-No Response in Gender - Post Graduate
+tchphd_r_nr,Teachers by Educational Qualification: Regular teachers-No Response in Gender - PhD
+tchpd_r_nr,Teachers by Educational Qualification: Regular teachers-No Response in Gender - Post-Doctoral
+tchnr_r_nr,Teachers by Educational Qualification: Regular teachers-No Response in Gender - No Response/ None
+tchug_p_m,Teachers by Educational Qualification: Contractual Teachers-Male - Below Graduate
+tchgrad_p_m,Teachers by Educational Qualification: Contractual Teachers-Male - Graduate
+tchpg_p_m,Teachers by Educational Qualification: Contractual Teachers-Male - Post Graduate
+tchphd_p_m,Teachers by Educational Qualification: Contractual Teachers-Male - PhD
+tchpd_p_m,Teachers by Educational Qualification: Contractual Teachers-Male - Post-Doctoral
+tchnr_p_m,Teachers by Educational Qualification: Contractual Teachers-Male - No Response/ None
+tchug_p_f,Teachers by Educational Qualification: Contractual Teachers-Female - Below Graduate
+tchgrad_p_f,Teachers by Educational Qualification: Contractual Teachers-Female - Graduate
+tchpg_p_f,Teachers by Educational Qualification: Contractual Teachers-Female - Post Graduate
+tchphd_p_f,Teachers by Educational Qualification: Contractual Teachers-Female - PhD
+tchpd_p_f,Teachers by Educational Qualification: Contractual Teachers-Female - Post-Doctoral
+tchnr_p_f,Teachers by Educational Qualification: Contractual Teachers-Female - No Response/ None
+tchug_p_nr,Teachers by Educational Qualification: Contractual Teachers-No Response in Gender - Below Graduate
+tchgrad_p_nr,Teachers by Educational Qualification: Contractual Teachers-No Response in Gender - Graduate
+tchpg_p_nr,Teachers by Educational Qualification: Contractual Teachers-No Response in Gender - Post Graduate
+tchphd_p_nr,Teachers by Educational Qualification: Contractual Teachers-No Response in Gender - PhD
+tchpd_p_nr,Teachers by Educational Qualification: Contractual Teachers-No Response in Gender - Post-Doctoral
+tchnr_p_nr,Teachers by Educational Qualification: Contractual Teachers-No Response in Gender - No Response/ None
+tchbtt_m,Teachers by Professional Qualification: Male-2 Years Basic Teacher Training - 2 Years Basic Teacher Training
+tchbed_m,Teachers by Professional Qualification: Male-B. Ed/ B. El. Ed - B. Ed/ B. El. Ed
+tchmed_m,Teachers by Professional Qualification: Male-M. Ed. - M. Ed.
+tchoth_m,Teachers by Professional Qualification: Male-Other - Other
+tchse_m,Teachers by Professional Qualification: Male-Diploma/ Degree in Special Education - Diploma/ Degree in Special Education
+tchnr_m,Teachers by Professional Qualification: Male-No Response / None - No Response / None
+tchbtt_f,Teachers by Professional Qualification: Female-B. Ed/ B. El. Ed - B. Ed/ B. El. Ed
+tchbed_f,Teachers by Professional Qualification: Female-M. Ed. - M. Ed.
+tchmed_f,Teachers by Professional Qualification: Female-Other - Other
+tchoth_f,Teachers by Professional Qualification: Female-Diploma/ Degree in Special Education - Diploma/ Degree in Special Education
+tchse_f,Teachers by Professional Qualification: Female-No Response / None - No Response / None
+tchnr_f,Teachers by Professional Qualification: Female-B. Ed/ B. El. Ed - B. Ed/ B. El. Ed
+tchbtt_nr,Teachers by Professional Qualification: No Response in Gender-B. Ed/ B. El. Ed - B. Ed/ B. El. Ed
+tchbed_nr,Teachers by Professional Qualification: No Response in Gender-M. Ed. - M. Ed.
+tchmed_nr,Teachers by Professional Qualification: No Response in Gender-Other - Other
+tchoth_nr,Teachers by Professional Qualification: No Response in Gender-Diploma/ Degree in Special Education - Diploma/ Degree in Special Education
+tchse_nr,Teachers by Professional Qualification: No Response in Gender-No Response / None - No Response / None
+tchnr_nr,Teachers by Professional Qualification: No Response in Gender-B. Ed/ B. El. Ed - B. Ed/ B. El. Ed
+enrc7_py,Enrolment in Previous Year by Grade: Class 7-Class 7 - Class 7
+enrc8_py,Enrolment in Previous Year by Grade: Class 8-Class 8 - Class 8
+enrc9_py,Enrolment in Previous Year by Grade: Class 9-Class 9 - Class 9
+enrc10_py,Enrolment in Previous Year by Grade: Class 10-Class 10 - Class 10
+enr11_py,Enrolment in Previous Year by Grade: Class 11-Class 11 - Class 11
+enr12_py,Enrolment in Previous Year by Grade: Class 12-Class 12 - Class 12

@@ -1,16 +1,14 @@
 What do India's classrooms actually tell us? 📚🇮🇳
 
-I stopped looking at the national literacy average and started looking at the spread — state by state. Three things stood out:
+I stopped looking at the national literacy average and started looking at the spread — state by state, using real 2015-16 UDISE government data. Three things stood out:
 
-📊 ~20 percentage points separate the top and bottom states
-👧 The male–female literacy gap tops 11 points in some states
-🏫 Crowded classrooms and school dropout move together (r ≈ 0.89)
+📊 ~30 percentage points separate the top and bottom states (Kerala 93.9% vs. Bihar 63.8%)
+👧 The male–female literacy gap hits 27.9 points in Rajasthan
+🔗 Higher-literacy states have meaningfully smaller gender gaps (r ≈ -0.74) — the two move together
 
-That last one matters most. A high pupil-teacher ratio tracking with higher dropout isn't destiny — it's a policy lever. Hire teachers, shrink classes, keep kids in school.
+One honest twist: I also tested whether crowded classrooms track lower exam pass rates, expecting a clean story. The real data didn't support it (r ≈ -0.13, essentially no relationship) — so I reported that as a null result instead of reaching for a stronger claim the data doesn't back.
 
-This is a small open-source data project framed around UN SDG 4: Quality Education. Full code + charts on my GitHub (link in bio). Fork it, drop in your own data, and see what your state's numbers say.
-
-(Note: current figures are from an illustrative sample dataset — real Census/UDISE+ data going in next.)
+This is a small open-source data project framed around UN SDG 4: Quality Education. Full code + charts on my GitHub (link in bio). Fork it, drop in your own state's data, and see what it says.
 
 What question would YOU ask of India's education data? 👇
 

@@ -1,34 +1,34 @@
 # India Education & Literacy Gap Analysis 📚🇮🇳
 
-A data-analysis project examining literacy, gender gaps, and school dropout across Indian states — framed around **UN Sustainable Development Goal 4: Quality Education**.
+![Higher-literacy states tend to have smaller gender gaps](outputs/03_literacy_vs_gender_gap.png)
 
-The goal is simple: turn public education data into a picture a policymaker (or a curious citizen) can act on. Which states are pulling ahead? Where is the gender gap widest? And is there anything a state can *do* about dropout?
+A data-analysis project examining literacy and gender gaps across Indian states, using real 2015-16 UDISE administrative data — framed around **UN Sustainable Development Goal 4: Quality Education**.
 
-> ⚠️ **About the data:** the CSV in `data/` is **synthetic sample data** so the code runs immediately. It is *not* official. To publish real findings, swap in data from the sources listed below and re-run. Everything else works unchanged.
+> **Data:** real UDISE (Ministry of Education) state-level school census, 2015-16, accessed via a public Kaggle mirror. Not synthetic, not a survey estimate. See [`docs/DATA_SOURCES.md`](docs/DATA_SOURCES.md) for the exact source, license, and how every derived number is computed.
 
 ---
 
 ## What this project shows
 
-- **Data cleaning & validation** — standardising names, dropping impossible values, fixing types
-- **Ranking & comparison** — literacy across 21 states
-- **Segmentation** — male vs female literacy, and the gap between them
-- **Correlation analysis** — does classroom crowding track with dropout?
-- **Trend analysis** — literacy trajectories over four census points
+- **Data cleaning & validation** — parsing a 630-column raw administrative file down to a clean state-level table, fixing inconsistent state-name formatting
+- **Ranking & comparison** — literacy across 35 states/UTs
+- **Segmentation** — male vs. female literacy, and the gap between them
+- **Correlation analysis, reported honestly** — including a null result (see below)
 - **Communication** — a clean findings summary and four publication-ready charts
 
 ---
 
-## Sample findings
+## Key findings
 
-*(from the synthetic data — illustrative only)*
+*(2015-16 UDISE state-level data — a single-year snapshot, not a trend; see [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md))*
 
-- Literacy leaders and laggards differ by nearly **20 percentage points**.
-- The **gender gap** is widest in a handful of northern states, exceeding 11 points.
-- Pupil-teacher ratio and dropout correlate strongly (**r ≈ 0.89**) — crowded classrooms and dropout travel together, which points at teacher hiring as a lever.
+- Literacy ranges from **63.8% (Bihar) to 93.9% (Kerala)** — a ~30-point spread.
+- The **gender gap is widest in Rajasthan (27.9 points)**, followed by Jharkhand and Chhattisgarh.
+- **Higher-literacy states have meaningfully smaller gender gaps** (r ≈ -0.74) — literacy gains and gender parity move together in this data.
+- **Classroom crowding does *not* clearly track exam outcomes** — pupil-teacher ratio vs. Class 10 pass rate shows only a weak correlation (r ≈ -0.13). Reported as a genuine null result, not dropped or reframed to manufacture a stronger story.
 
-![Crowded classrooms vs dropout](outputs/03_dropout_vs_ptr.png)
 ![Gender gap by state](outputs/02_gender_gap.png)
+![Classroom crowding vs pass rate](outputs/04_ptr_vs_pass_rate.png)
 
 ---
 
@@ -38,11 +38,11 @@ The goal is simple: turn public education data into a picture a policymaker (or 
 # 1. install dependencies
 pip install -r requirements.txt
 
-# 2. generate the sample dataset
-python src/generate_sample_data.py
-
-# 3. run the analysis (writes charts + findings to outputs/)
+# 2. run the analysis (writes charts + findings to outputs/)
 python src/analysis.py
+
+# 3. run the tests
+pytest -q
 ```
 
 Or open `notebooks/exploration.ipynb` to step through it interactively.
@@ -53,35 +53,37 @@ Or open `notebooks/exploration.ipynb` to step through it interactively.
 
 ```
 india-education-analysis/
-├── data/        # dataset (synthetic sample — replace with real data)
-├── src/         # data generation + analysis pipeline
+├── data/        # cached real UDISE CSV (see docs/DATA_SOURCES.md)
+├── src/
+│   ├── data.py       # load + clean the raw UDISE file, derive metrics
+│   └── analysis.py   # findings + charts
+├── tests/       # pytest suite
 ├── notebooks/   # interactive exploration
 ├── outputs/     # generated charts + findings.md
+├── docs/
+│   ├── DATA_SOURCES.md  # source, license, derived-column formulas
+│   └── METHODOLOGY.md   # what this cross-section can and cannot claim
 ├── requirements.txt
 └── README.md
 ```
 
 ---
 
-## Use real data
+## Limitations
 
-Replace `data/india_education_sample.csv` with real figures (same column names) from:
-
-- **Census of India** — https://censusindia.gov.in
-- **UDISE+** (school-level education stats) — https://udiseplus.gov.in
-- **UNESCO Institute for Statistics** — https://uis.unesco.org
-- **Periodic Labour Force Survey (PLFS)** — MoSPI
-
-Columns expected: `state, year, literacy_overall, literacy_male, literacy_female, gender_gap, dropout_rate_secondary, pupil_teacher_ratio, gross_enrollment_ratio`.
+- **Single-year cross-section (2015-16)** — no trend analysis. An earlier version of this project simulated a multi-year trend from synthetic data; this rebuild deliberately does not repeat that.
+- **Telangana is excluded** — its literacy figures are missing in this release (it split from Andhra Pradesh in 2014). Documented, not zero-filled.
+- **Delhi's Class 10 pass rate is missing**, not 0% — the source data shows zero students appeared that cycle.
+- Full details in [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md).
 
 ---
 
 ## Roadmap
 
-- [ ] Swap synthetic data for real Census + UDISE+ figures
-- [ ] Add district-level drilldown
+- [ ] Pull a newer UDISE+ release for a more recent snapshot
+- [ ] Add a second year to support an honest trend comparison
+- [ ] Add a district-level drilldown
 - [ ] Build a small Streamlit dashboard
-- [ ] Add a rural vs urban split
 
 ---
 
@@ -92,3 +94,5 @@ MIT — free to use, learn from, and build on.
 ## Author
 
 Ruchir Ganatra — [portfolio](https://ruchirganatra-github-io.vercel.app) · aspiring data analyst focused on education and social-impact data.
+
+*Data © Ministry of Education, Government of India (UDISE); accessed via a Kaggle mirror. This project is an independent analysis and is not affiliated with or endorsed by the Ministry of Education or UDISE+.*

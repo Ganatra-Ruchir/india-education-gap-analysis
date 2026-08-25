@@ -2,21 +2,24 @@
 India Education & Literacy Gap Analysis
 =======================================
 
-Loads the education dataset, cleans it, runs a set of analyses, and writes
-chart images + a findings summary to the outputs/ folder.
+Loads real 2015-16 UDISE state-level data, cleans it, runs a set of analyses,
+and writes chart images + a findings summary to the outputs/ folder.
+
+This is a single-year cross-section (2015-16), not a multi-year trend --
+see docs/DATA_SOURCES.md and docs/METHODOLOGY.md for what that does and
+does not support.
 
 Run:
-    python src/generate_sample_data.py   # first, to create the sample CSV
     python src/analysis.py
 """
 
 from pathlib import Path
-import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+from data import load_states
+
 ROOT = Path(__file__).resolve().parents[1]
-DATA = ROOT / "data" / "india_education_sample.csv"
 OUT = ROOT / "outputs"
 OUT.mkdir(exist_ok=True)
 
@@ -24,102 +27,81 @@ sns.set_theme(style="whitegrid", palette="deep")
 plt.rcParams["figure.dpi"] = 120
 
 
-def load_and_clean() -> pd.DataFrame:
-    """Load the CSV and apply basic cleaning / validation."""
-    df = pd.read_csv(DATA)
-
-    # Standardise text
-    df["state"] = df["state"].str.strip().str.title()
-
-    # Drop impossible values (defensive cleaning even on clean-ish data)
-    df = df[(df["literacy_overall"].between(0, 100))]
-    df = df[(df["dropout_rate_secondary"].between(0, 100))]
-
-    # Ensure correct dtypes
-    df["year"] = df["year"].astype(int)
-
-    return df.reset_index(drop=True)
-
-
-def latest_year(df: pd.DataFrame) -> pd.DataFrame:
-    return df[df["year"] == df["year"].max()].copy()
-
-
-def chart_literacy_ranking(df: pd.DataFrame) -> None:
-    """Bar chart: states ranked by overall literacy (latest year)."""
-    latest = latest_year(df).sort_values("literacy_overall", ascending=True)
-    plt.figure(figsize=(9, 8))
-    plt.barh(latest["state"], latest["literacy_overall"], color=sns.color_palette("crest", len(latest)))
+def chart_literacy_ranking(df) -> None:
+    """Bar chart: states ranked by overall literacy."""
+    d = df.sort_values("literacy_rate", ascending=True)
+    plt.figure(figsize=(9, 10))
+    plt.barh(d["state"], d["literacy_rate"], color=sns.color_palette("crest", len(d)))
     plt.xlabel("Overall literacy rate (%)")
-    plt.title(f"Literacy rate by state — {int(df['year'].max())}", fontweight="bold")
+    plt.title("Literacy rate by state — 2011 Census (via UDISE 2015-16)", fontweight="bold")
     plt.tight_layout()
     plt.savefig(OUT / "01_literacy_ranking.png")
     plt.close()
 
 
-def chart_gender_gap(df: pd.DataFrame) -> None:
-    """Bar chart: male-female literacy gap by state (latest year)."""
-    latest = latest_year(df).sort_values("gender_gap", ascending=False)
-    plt.figure(figsize=(9, 8))
-    colors = ["#c0392b" if g > latest["gender_gap"].median() else "#e67e22"
-              for g in latest["gender_gap"]]
-    plt.barh(latest["state"][::-1], latest["gender_gap"][::-1], color=colors[::-1])
+def chart_gender_gap(df) -> None:
+    """Bar chart: male-female literacy gap by state."""
+    d = df.sort_values("gender_gap", ascending=False)
+    colors = ["#c0392b" if g > d["gender_gap"].median() else "#e67e22" for g in d["gender_gap"]]
+    plt.figure(figsize=(9, 10))
+    plt.barh(d["state"][::-1], d["gender_gap"][::-1], color=colors[::-1])
     plt.xlabel("Male minus female literacy (percentage points)")
-    plt.title(f"Gender gap in literacy — {int(df['year'].max())}", fontweight="bold")
+    plt.title("Gender gap in literacy by state", fontweight="bold")
     plt.tight_layout()
     plt.savefig(OUT / "02_gender_gap.png")
     plt.close()
 
 
-def chart_dropout_vs_ptr(df: pd.DataFrame) -> None:
-    """Scatter: does a higher pupil-teacher ratio track higher dropout?"""
-    latest = latest_year(df)
+def chart_literacy_vs_gender_gap(df) -> None:
+    """Scatter: does higher overall literacy track a smaller gender gap?"""
     plt.figure(figsize=(8, 6))
-    sns.regplot(data=latest, x="pupil_teacher_ratio", y="dropout_rate_secondary",
+    sns.regplot(data=df, x="literacy_rate", y="gender_gap",
                 scatter_kws={"s": 60}, line_kws={"color": "#c0392b"})
-    for _, r in latest.iterrows():
-        plt.annotate(r["state"], (r["pupil_teacher_ratio"], r["dropout_rate_secondary"]),
+    for _, r in df.iterrows():
+        plt.annotate(r["state"], (r["literacy_rate"], r["gender_gap"]),
                      fontsize=7, alpha=0.7)
-    plt.xlabel("Pupil-teacher ratio")
-    plt.ylabel("Secondary dropout rate (%)")
-    plt.title("Crowded classrooms vs dropout", fontweight="bold")
+    plt.xlabel("Overall literacy rate (%)")
+    plt.ylabel("Gender gap (percentage points)")
+    plt.title("Higher-literacy states tend to have smaller gender gaps",
+              fontweight="bold")
     plt.tight_layout()
-    plt.savefig(OUT / "03_dropout_vs_ptr.png")
+    plt.savefig(OUT / "03_literacy_vs_gender_gap.png")
     plt.close()
 
 
-def chart_literacy_trend(df: pd.DataFrame) -> None:
-    """Line chart: literacy trend over time for a few contrasting states."""
-    focus = ["Kerala", "Bihar", "Rajasthan", "Tamil Nadu", "Uttar Pradesh"]
-    sub = df[df["state"].isin(focus)]
-    plt.figure(figsize=(9, 6))
-    for state, g in sub.groupby("state"):
-        g = g.sort_values("year")
-        plt.plot(g["year"], g["literacy_overall"], marker="o", label=state)
-    plt.xlabel("Year")
-    plt.ylabel("Overall literacy rate (%)")
-    plt.title("Literacy trajectory, selected states", fontweight="bold")
-    plt.legend()
+def chart_ptr_vs_pass_rate(df) -> None:
+    """Scatter: does a higher pupil-teacher ratio track a lower pass rate?"""
+    d = df.dropna(subset=["class10_pass_rate"])
+    plt.figure(figsize=(8, 6))
+    sns.regplot(data=d, x="pupil_teacher_ratio", y="class10_pass_rate",
+                scatter_kws={"s": 60}, line_kws={"color": "#c0392b"})
+    for _, r in d.iterrows():
+        plt.annotate(r["state"], (r["pupil_teacher_ratio"], r["class10_pass_rate"]),
+                     fontsize=7, alpha=0.7)
+    plt.xlabel("Pupil-teacher ratio (secondary)")
+    plt.ylabel("Class 10 board exam pass rate (%)")
+    plt.title("Classroom crowding vs. exam pass rate — no clear relationship",
+              fontweight="bold")
     plt.tight_layout()
-    plt.savefig(OUT / "04_literacy_trend.png")
+    plt.savefig(OUT / "04_ptr_vs_pass_rate.png")
     plt.close()
 
 
-def write_findings(df: pd.DataFrame) -> None:
+def write_findings(df) -> None:
     """Compute headline numbers and save a short findings file."""
-    latest = latest_year(df)
-    yr = int(df["year"].max())
+    top = df.nlargest(3, "literacy_rate")[["state", "literacy_rate"]]
+    bottom = df.nsmallest(3, "literacy_rate")[["state", "literacy_rate"]]
+    widest_gap = df.nlargest(3, "gender_gap")[["state", "gender_gap"]]
 
-    top = latest.nlargest(3, "literacy_overall")[["state", "literacy_overall"]]
-    bottom = latest.nsmallest(3, "literacy_overall")[["state", "literacy_overall"]]
-    widest_gap = latest.nlargest(3, "gender_gap")[["state", "gender_gap"]]
-    corr = latest["pupil_teacher_ratio"].corr(latest["dropout_rate_secondary"])
+    lit_gap_corr = df["literacy_rate"].corr(df["gender_gap"])
+    ptr_pass_corr = df["pupil_teacher_ratio"].corr(df["class10_pass_rate"])
 
     lines = [
-        f"# Key findings ({yr})",
+        "# Key findings",
         "",
-        "> Numbers below come from the SYNTHETIC sample dataset. Replace the data",
-        "> with official sources before citing any figure publicly.",
+        "Data: 2015-16 UDISE state-level school census (literacy figures are "
+        "from Census 2011, as reported in this release). See "
+        "docs/DATA_SOURCES.md. Single-year cross-section, not a trend.",
         "",
         "## Highest literacy",
         top.to_string(index=False),
@@ -130,28 +112,40 @@ def write_findings(df: pd.DataFrame) -> None:
         "## Widest gender gap",
         widest_gap.to_string(index=False),
         "",
-        "## Classroom crowding vs dropout",
-        f"Correlation (pupil-teacher ratio vs secondary dropout): {corr:.2f}",
-        "A positive value suggests more crowded classrooms tend to coincide with",
-        "higher dropout — a lever policymakers can act on by hiring teachers.",
+        "## Literacy vs. gender gap",
+        f"Correlation (literacy rate vs. gender gap): {lit_gap_corr:.2f}",
+        "Higher-literacy states tend to have meaningfully smaller male-female "
+        "gaps -- literacy gains and gender parity move together in this data, "
+        "they are not independent problems.",
         "",
-        f"## National snapshot",
-        f"Mean literacy across states: {latest['literacy_overall'].mean():.1f}%",
-        f"Mean gender gap: {latest['gender_gap'].mean():.1f} points",
-        f"Mean secondary dropout: {latest['dropout_rate_secondary'].mean():.1f}%",
+        "## Classroom crowding vs. exam pass rate",
+        f"Correlation (pupil-teacher ratio vs. Class 10 pass rate): {ptr_pass_corr:.2f}",
+        "This is a weak/near-zero correlation. Unlike a popular assumption, "
+        "this cross-section does not show crowded secondary classrooms "
+        "tracking lower board-exam pass rates -- reported honestly as a null "
+        "result rather than dropped or reframed to fit a stronger story.",
+        "",
+        "## Data notes",
+        "- Telangana's literacy figures are missing in this release -- it "
+        "split from Andhra Pradesh in 2014 and Census literacy was not yet "
+        "separately reported for it here. Andhra Pradesh's exam figures in "
+        "this file reflect only the post-bifurcation state.",
+        "- Delhi shows zero students appeared for the Class 10 exam this "
+        "cycle in the source data; its pass rate is reported as missing, "
+        "not 0%.",
+        f"- {len(df)} of India's 36 states/UTs are included after cleaning.",
     ]
-    (OUT / "findings.md").write_text("\n".join(lines))
+    (OUT / "findings.md").write_text("\n".join(lines), encoding="utf-8")
     print("\n".join(lines))
 
 
 def main() -> None:
-    df = load_and_clean()
-    print(f"Loaded {len(df)} rows across {df['state'].nunique()} states "
-          f"and years {sorted(df['year'].unique())}\n")
+    df = load_states()
+    print(f"Loaded {len(df)} states/UTs\n")
     chart_literacy_ranking(df)
     chart_gender_gap(df)
-    chart_dropout_vs_ptr(df)
-    chart_literacy_trend(df)
+    chart_literacy_vs_gender_gap(df)
+    chart_ptr_vs_pass_rate(df)
     write_findings(df)
     print(f"\nCharts and findings written to {OUT}/")
 
