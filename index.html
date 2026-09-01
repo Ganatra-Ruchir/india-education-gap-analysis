@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What India's Classrooms Tell Us — Literacy & Gender Gap, 2015-16</title>
+<meta name="description" content="An interactive data story on India's state-level literacy and gender gaps, built from real UDISE Ministry of Education census data.">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.35.2/plotly.min.js"></script>
+<style>
+  :root{
+    --ink:#0b0b0b; --ink2:#52514e; --muted:#898781; --grid:#e1e0d9; --axis:#c3c2b7;
+    --surface:#fcfcfb; --surface2:#f5f4f0; --blue:#2a78d6; --red:#e34948; --magenta:#e87ba4;
+    --maxw:920px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--surface); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6;
+  }
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+  header.hero{
+    padding:96px 24px 64px; text-align:center; background:linear-gradient(180deg,#fff, var(--surface));
+    border-bottom:1px solid var(--grid);
+  }
+  header.hero .kicker{
+    text-transform:uppercase; letter-spacing:.14em; font-size:12px; font-weight:700;
+    color:var(--blue); margin-bottom:18px;
+  }
+  header.hero h1{
+    font-size:clamp(28px,5vw,46px); line-height:1.15; margin:0 0 20px; font-weight:800;
+    max-width:820px; margin-left:auto; margin-right:auto; letter-spacing:-.01em;
+  }
+  header.hero p.sub{
+    font-size:18px; color:var(--ink2); max-width:640px; margin:0 auto; font-weight:400;
+  }
+  header.hero .meta{margin-top:28px; font-size:13px; color:var(--muted);}
+  section{padding:56px 0; border-bottom:1px solid var(--grid);}
+  section:last-of-type{border-bottom:none;}
+  .eyebrow{
+    font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--muted); margin-bottom:10px;
+  }
+  h2{font-size:clamp(22px,3.4vw,30px); margin:0 0 14px; font-weight:800; letter-spacing:-.01em;}
+  p.lede{font-size:17px; color:var(--ink2); max-width:70ch;}
+  .stat-row{display:flex; gap:28px; flex-wrap:wrap; margin:28px 0 8px;}
+  .stat{
+    background:var(--surface2); border:1px solid var(--grid); border-radius:10px;
+    padding:16px 20px; min-width:160px; flex:1;
+  }
+  .stat .num{font-size:26px; font-weight:800; color:var(--ink);}
+  .stat .lbl{font-size:12.5px; color:var(--muted); margin-top:2px;}
+  .chart{
+    background:#fff; border:1px solid var(--grid); border-radius:12px; margin:28px 0 8px;
+    padding:8px 8px 4px; overflow:hidden;
+  }
+  .chart-caption{font-size:13px; color:var(--muted); padding:4px 12px 12px; border-top:1px solid var(--grid); margin-top:-2px;}
+  .callout{
+    border-left:3px solid var(--red); background:#fff6f5; padding:14px 18px; border-radius:0 8px 8px 0;
+    font-size:15.5px; color:#4a2a29; margin:22px 0;
+  }
+  .callout.good{border-left-color:var(--blue); background:#f1f7ff; color:#1f3a5c;}
+  .callout b{color:var(--ink);}
+  .controls{display:flex; gap:8px; flex-wrap:wrap; margin:18px 0 4px;}
+  .controls button{
+    font:inherit; font-size:13px; font-weight:600; padding:7px 14px; border-radius:20px;
+    border:1px solid var(--axis); background:#fff; color:var(--ink2); cursor:pointer;
+    transition:all .15s;
+  }
+  .controls button:hover{border-color:var(--blue); color:var(--blue);}
+  .controls button.active{background:var(--ink); color:#fff; border-color:var(--ink);}
+  footer{padding:48px 24px 80px; text-align:center; color:var(--muted); font-size:13.5px;}
+  footer a{color:var(--blue); text-decoration:none;}
+  .limits{background:var(--surface2); border-radius:12px; padding:22px 26px; font-size:14.5px; color:var(--ink2);}
+  .limits li{margin-bottom:8px;}
+  .tag{display:inline-block; font-size:11.5px; font-weight:700; background:var(--surface2); color:var(--ink2); border:1px solid var(--grid); padding:3px 9px; border-radius:20px; margin-right:6px;}
+  @media (max-width:640px){ header.hero{padding:64px 20px 44px;} section{padding:40px 0;} }
+
+  /* Venn diagram */
+  .venn-region{cursor:pointer; transition:opacity .15s;}
+  .venn-region:hover{opacity:0.75;}
+  .venn-count{font-size:22px; font-weight:800; fill:var(--ink); pointer-events:none;}
+  .venn-count-lbl{font-size:11px; fill:var(--ink2); pointer-events:none;}
+  .venn-legend{font-size:13px; font-weight:700; pointer-events:none;}
+  #venn-detail ul{margin:8px 0 0; padding-left:18px;}
+  #venn-detail{cursor:default;}
+
+  /* Data assistant chat widget */
+  #chat-launcher{
+    position:fixed; right:22px; bottom:22px; z-index:40;
+    background:var(--ink); color:#fff; border:none; border-radius:28px;
+    padding:13px 20px; font:inherit; font-weight:700; font-size:14px; cursor:pointer;
+    box-shadow:0 6px 20px rgba(0,0,0,.18); display:flex; align-items:center; gap:8px;
+  }
+  #chat-launcher:hover{background:#222;}
+  #chat-panel{
+    position:fixed; right:22px; bottom:88px; z-index:40; width:340px; max-width:calc(100vw - 32px);
+    height:460px; max-height:calc(100vh - 140px); background:#fff; border:1px solid var(--grid);
+    border-radius:16px; box-shadow:0 12px 40px rgba(0,0,0,.2); display:none; flex-direction:column; overflow:hidden;
+  }
+  #chat-panel.open{display:flex;}
+  #chat-head{padding:14px 16px; border-bottom:1px solid var(--grid); background:var(--surface2);}
+  #chat-head b{font-size:14px;}
+  #chat-head div{font-size:11.5px; color:var(--muted); margin-top:2px;}
+  #chat-log{flex:1; overflow-y:auto; padding:14px 16px; display:flex; flex-direction:column; gap:10px;}
+  .msg{max-width:85%; padding:9px 12px; border-radius:12px; font-size:13.5px; line-height:1.45;}
+  .msg.bot{background:var(--surface2); color:var(--ink); align-self:flex-start; border-bottom-left-radius:3px;}
+  .msg.user{background:var(--blue); color:#fff; align-self:flex-end; border-bottom-right-radius:3px;}
+  #chat-suggest{display:flex; gap:6px; flex-wrap:wrap; padding:0 16px 10px;}
+  #chat-suggest button{
+    font:inherit; font-size:11.5px; padding:5px 10px; border-radius:14px; border:1px solid var(--axis);
+    background:#fff; color:var(--ink2); cursor:pointer;
+  }
+  #chat-suggest button:hover{border-color:var(--blue); color:var(--blue);}
+  #chat-form{display:flex; gap:8px; padding:12px; border-top:1px solid var(--grid);}
+  #chat-input{flex:1; font:inherit; font-size:13.5px; padding:9px 12px; border:1px solid var(--axis); border-radius:10px;}
+  #chat-form button{font:inherit; font-weight:700; font-size:13px; background:var(--ink); color:#fff; border:none; border-radius:10px; padding:0 16px; cursor:pointer;}
+  @media (max-width:420px){ #chat-panel{right:16px; left:16px; width:auto;} #chat-launcher{right:16px;} }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="kicker">Data Story · India · UN SDG 4</div>
+  <h1>How well is each Indian state teaching its kids to read and write?</h1>
+  <p class="sub">A simple, state-by-state look at literacy (who can read and write) and the gap between boys and girls — using real government school records from 2015&ndash;16, not guesses or made-up numbers.</p>
+  <div class="meta">35 states &amp; union territories · one snapshot in time · every chart below is interactive — just hover over it</div>
+</header>
+
+<div class="wrap">
+
+  <section id="s1">
+    <div class="eyebrow">Big picture first</div>
+    <h2>Some states are far ahead of others</h2>
+    <p class="lede">The country-wide average hides a huge difference. In Kerala, almost everyone can read and write. In Bihar, nearly 1 in 3 people can't. <b>Hover over any bar</b> to see the exact number — the 3 best and 3 worst states are colored so they stand out.</p>
+    <div class="stat-row">
+      <div class="stat"><div class="num">93.9%</div><div class="lbl">Kerala — the best</div></div>
+      <div class="stat"><div class="num">63.8%</div><div class="lbl">Bihar — the lowest</div></div>
+      <div class="stat"><div class="num">~30 pts</div><div class="lbl">the gap between them</div></div>
+    </div>
+    <div class="chart"><div id="chart-literacy" style="width:100%;height:820px;"></div></div>
+    <div class="chart-caption">Source: 2011 Census figures, reported in the 2015-16 government school survey · the dotted line is the national average</div>
+  </section>
+
+  <section id="s2">
+    <div class="eyebrow">Boys vs. girls</div>
+    <h2>In every single state, boys are ahead of girls</h2>
+    <p class="lede">This chart compares literacy for boys (blue) and girls (pink) in each state. In every state, boys score higher — the only question is by how much. In Rajasthan, the gap is the biggest in the country: almost 28 points. <b>Hover over the dots</b> to compare a state's boys and girls directly.</p>
+    <div class="chart"><div id="chart-gender" style="width:100%;height:900px;"></div></div>
+    <div class="chart-caption">States are sorted from smallest gap to biggest · the 3 widest gaps are labeled</div>
+    <div class="callout"><b>Rajasthan, Jharkhand, and Chhattisgarh</b> have the biggest gaps between boys and girls — more than double the gap seen in states like Meghalaya or Mizoram.</div>
+  </section>
+
+  <section id="s3">
+    <div class="eyebrow">Connecting the dots</div>
+    <h2>The more literate a state is, the smaller its boy-girl gap tends to be</h2>
+    <p class="lede">Here, each dot is one state. States further to the right have higher overall literacy. States lower down have a smaller gap between boys and girls. The pattern is clear: better overall literacy usually comes with a smaller gap — these two problems seem to move together, not separately.</p>
+    <div class="chart"><div id="chart-corr1" style="width:100%;height:520px;"></div></div>
+    <div class="chart-caption">Each dot is one state · the red line shows the overall pattern</div>
+    <div class="callout good">This is a strong pattern (measured as &minus;0.74 on a scale from &minus;1 to 1, where numbers closer to &minus;1 or 1 mean a stronger link). In plain terms: raising overall literacy and closing the gender gap look like the same fight, not two separate ones.</div>
+  </section>
+
+  <section id="s4">
+    <div class="eyebrow">Testing a common assumption</div>
+    <h2>Bigger classrooms don't clearly mean worse exam results</h2>
+    <p class="lede">It seems obvious: more students per teacher should mean worse exam scores. This data says that's not really true. Uttar Pradesh and Bihar have the most crowded classrooms in the country, but their pass rates land right in the middle of the pack — not at the bottom.</p>
+    <div class="chart"><div id="chart-corr2" style="width:100%;height:520px;"></div></div>
+    <div class="chart-caption">Each dot is one state · the flat line shows there's basically no pattern here</div>
+    <div class="callout">This measured at almost 0 (&minus;0.13 on the same &minus;1 to 1 scale) — in plain terms, barely any link at all. It would have been easy to quietly drop this chart when it didn't confirm the expected story. It's shown here anyway: finding out that a popular assumption doesn't hold up is just as useful as confirming one that does, especially before spending a real budget on it.</div>
+  </section>
+
+  <section id="s4b">
+    <div class="eyebrow">Putting it all together</div>
+    <h2>Which states show up in more than one problem area?</h2>
+    <p class="lede">Each circle below is one problem: below-average literacy, a bigger-than-average boy-girl gap, and more crowded classrooms than average. A state can land in more than one circle at once. <b>Click any region</b> to see which states are in it — the middle, where all three overlap, is where several problems are stacked on top of each other.</p>
+    <div class="chart" style="padding:20px 8px;">
+      <svg id="venn-svg" viewBox="0 0 760 560" style="width:100%; max-width:640px; display:block; margin:0 auto;"></svg>
+    </div>
+    <div id="venn-detail" class="callout" style="display:none;"></div>
+    <div class="chart-caption">Based on this dataset's own averages · click a region, or one of the labels below it, to see the state list</div>
+  </section>
+
+  <section id="s5">
+    <div class="eyebrow">What this data can't tell us</div>
+    <h2>Being upfront about the limits</h2>
+    <div class="limits">
+      <ul>
+        <li><b>This is one snapshot in time (2015-16)</b>, not a multi-year trend — it shows how things looked, not how they're changing.</li>
+        <li><b>Telangana isn't included</b> — it split off from Andhra Pradesh in 2014, and its literacy numbers weren't reported separately yet in this data. Left out on purpose, not filled in with a guess.</li>
+        <li><b>Delhi's exam pass rate is shown as missing, not zero</b> — the records show no students appeared for that exam that year, which isn't the same as everyone failing.</li>
+        <li>35 of India's 36 states and union territories are included, after cleaning up a real government file with over 600 columns.</li>
+      </ul>
+    </div>
+    <p style="margin-top:22px;"><span class="tag">What's next</span> Pulling newer government data to show a real multi-year trend, breaking results down by district, and building a small interactive tool to explore the data.</p>
+  </section>
+
+</div>
+
+<footer>
+  Data © Ministry of Education, Government of India (UDISE), accessed via a public Kaggle mirror. Independent analysis, not affiliated with or endorsed by the Ministry of Education or UDISE+.<br><br>
+  <b>Ruchir Ganatra</b> — data analyst focused on education &amp; social-impact data ·
+  <a href="https://github.com/Ganatra-Ruchir/india-education-gap-analysis">source &amp; methodology on GitHub</a> ·
+  <a href="https://ruchirganatra-github-io.vercel.app">portfolio</a>
+</footer>
+
+<button id="chat-launcher" onclick="toggleChat()">💬 Ask about this data</button>
+<div id="chat-panel">
+  <div id="chat-head">
+    <b>Data Assistant</b>
+    <div>Answers come only from the numbers on this page — no outside AI, nothing sent anywhere.</div>
+  </div>
+  <div id="chat-log"></div>
+  <div id="chat-suggest">
+    <button onclick="askChat('Which state has the highest literacy?')">Highest literacy?</button>
+    <button onclick="askChat('Which state has the biggest gender gap?')">Biggest gender gap?</button>
+    <button onclick="askChat('Tell me about Bihar')">About Bihar</button>
+    <button onclick="askChat('What is the crowding vs pass rate finding?')">Crowding vs. pass rate?</button>
+  </div>
+  <form id="chat-form" onsubmit="return submitChat(event)">
+    <input id="chat-input" type="text" placeholder="Ask about any state or finding…" autocomplete="off">
+    <button type="submit">Send</button>
+  </form>
+</div>
+
+<script>
+const DATA = [{"state": "Jammu And Kashmir", "literacy_rate": 68.74, "male_literacy_rate": 78.26, "female_literacy_rate": 58.01, "gender_gap": 20.3, "pupil_teacher_ratio": 18.7, "class10_appeared": 120034, "class10_passed": 78870, "class10_pass_rate": 65.7}, {"state": "Himachal Pradesh", "literacy_rate": 83.78, "male_literacy_rate": 90.83, "female_literacy_rate": 76.6, "gender_gap": 14.2, "pupil_teacher_ratio": 15.8, "class10_appeared": 132047, "class10_passed": 99737, "class10_pass_rate": 75.5}, {"state": "Punjab", "literacy_rate": 76.68, "male_literacy_rate": 81.48, "female_literacy_rate": 71.34, "gender_gap": 10.1, "pupil_teacher_ratio": 19.5, "class10_appeared": 422929, "class10_passed": 359711, "class10_pass_rate": 85.1}, {"state": "Chandigarh", "literacy_rate": 86.43, "male_literacy_rate": 90.54, "female_literacy_rate": 81.38, "gender_gap": 9.2, "pupil_teacher_ratio": 20.3, "class10_appeared": 16759, "class10_passed": 16141, "class10_pass_rate": 96.3}, {"state": "Uttarakhand", "literacy_rate": 79.63, "male_literacy_rate": 88.33, "female_literacy_rate": 70.7, "gender_gap": 17.6, "pupil_teacher_ratio": 19.7, "class10_appeared": 185631, "class10_passed": 141466, "class10_pass_rate": 76.2}, {"state": "Haryana", "literacy_rate": 76.64, "male_literacy_rate": 85.38, "female_literacy_rate": 66.77, "gender_gap": 18.6, "pupil_teacher_ratio": 17.3, "class10_appeared": 400057, "class10_passed": 250160, "class10_pass_rate": 62.5}, {"state": "Delhi", "literacy_rate": 86.34, "male_literacy_rate": 91.03, "female_literacy_rate": 80.93, "gender_gap": 10.1, "pupil_teacher_ratio": 25.5, "class10_appeared": 0, "class10_passed": 0, "class10_pass_rate": null}, {"state": "Rajasthan", "literacy_rate": 67.06, "male_literacy_rate": 80.51, "female_literacy_rate": 52.66, "gender_gap": 27.9, "pupil_teacher_ratio": 24.8, "class10_appeared": 950554, "class10_passed": 767077, "class10_pass_rate": 80.7}, {"state": "Uttar Pradesh", "literacy_rate": 69.72, "male_literacy_rate": 79.24, "female_literacy_rate": 59.26, "gender_gap": 20.0, "pupil_teacher_ratio": 68.3, "class10_appeared": 1898964, "class10_passed": 1578736, "class10_pass_rate": 83.1}, {"state": "Bihar", "literacy_rate": 63.82, "male_literacy_rate": 73.39, "female_literacy_rate": 53.33, "gender_gap": 20.1, "pupil_teacher_ratio": 70.1, "class10_appeared": 1240895, "class10_passed": 938185, "class10_pass_rate": 75.6}, {"state": "Sikkim", "literacy_rate": 82.2, "male_literacy_rate": 87.29, "female_literacy_rate": 76.43, "gender_gap": 10.9, "pupil_teacher_ratio": 16.1, "class10_appeared": 9491, "class10_passed": 8745, "class10_pass_rate": 92.1}, {"state": "Arunachal Pradesh", "literacy_rate": 66.95, "male_literacy_rate": 73.69, "female_literacy_rate": 59.57, "gender_gap": 14.1, "pupil_teacher_ratio": 26.5, "class10_appeared": 25126, "class10_passed": 21708, "class10_pass_rate": 86.4}, {"state": "Nagaland", "literacy_rate": 80.11, "male_literacy_rate": 83.29, "female_literacy_rate": 76.69, "gender_gap": 6.6, "pupil_teacher_ratio": 16.2, "class10_appeared": 14906, "class10_passed": 11512, "class10_pass_rate": 77.2}, {"state": "Manipur", "literacy_rate": 79.85, "male_literacy_rate": 86.49, "female_literacy_rate": 73.17, "gender_gap": 13.3, "pupil_teacher_ratio": 14.3, "class10_appeared": 34945, "class10_passed": 29029, "class10_pass_rate": 83.1}, {"state": "Mizoram", "literacy_rate": 91.58, "male_literacy_rate": 93.72, "female_literacy_rate": 89.4, "gender_gap": 4.3, "pupil_teacher_ratio": 10.9, "class10_appeared": 13528, "class10_passed": 11217, "class10_pass_rate": 82.9}, {"state": "Tripura", "literacy_rate": 87.75, "male_literacy_rate": 92.18, "female_literacy_rate": 83.15, "gender_gap": 9.0, "pupil_teacher_ratio": 18.9, "class10_appeared": 39761, "class10_passed": 27312, "class10_pass_rate": 68.7}, {"state": "Meghalaya", "literacy_rate": 75.48, "male_literacy_rate": 77.17, "female_literacy_rate": 73.78, "gender_gap": 3.4, "pupil_teacher_ratio": 14.3, "class10_appeared": 32590, "class10_passed": 23626, "class10_pass_rate": 72.5}, {"state": "Assam", "literacy_rate": 73.18, "male_literacy_rate": 78.81, "female_literacy_rate": 67.27, "gender_gap": 11.5, "pupil_teacher_ratio": 15.2, "class10_appeared": 340288, "class10_passed": 223972, "class10_pass_rate": 65.8}, {"state": "West Bengal", "literacy_rate": 77.08, "male_literacy_rate": 82.67, "female_literacy_rate": 71.16, "gender_gap": 11.5, "pupil_teacher_ratio": 45.7, "class10_appeared": 1029645, "class10_passed": 851019, "class10_pass_rate": 82.7}, {"state": "Jharkhand", "literacy_rate": 67.63, "male_literacy_rate": 78.45, "female_literacy_rate": 56.21, "gender_gap": 22.2, "pupil_teacher_ratio": 68.8, "class10_appeared": 386110, "class10_passed": 297770, "class10_pass_rate": 77.1}, {"state": "Odisha", "literacy_rate": 73.45, "male_literacy_rate": 82.4, "female_literacy_rate": 64.36, "gender_gap": 18.0, "pupil_teacher_ratio": 23.6, "class10_appeared": 482707, "class10_passed": 399347, "class10_pass_rate": 82.7}, {"state": "Chhattisgarh", "literacy_rate": 71.04, "male_literacy_rate": 81.45, "female_literacy_rate": 60.59, "gender_gap": 20.9, "pupil_teacher_ratio": 32.0, "class10_appeared": 415577, "class10_passed": 242815, "class10_pass_rate": 58.4}, {"state": "Madhya Pradesh", "literacy_rate": 70.63, "male_literacy_rate": 80.53, "female_literacy_rate": 60.02, "gender_gap": 20.5, "pupil_teacher_ratio": 38.9, "class10_appeared": 878465, "class10_passed": 561256, "class10_pass_rate": 63.9}, {"state": "Gujarat", "literacy_rate": 79.31, "male_literacy_rate": 87.23, "female_literacy_rate": 70.73, "gender_gap": 16.5, "pupil_teacher_ratio": 32.1, "class10_appeared": 805468, "class10_passed": 508045, "class10_pass_rate": 63.1}, {"state": "Daman & Diu", "literacy_rate": 87.07, "male_literacy_rate": 91.48, "female_literacy_rate": 79.59, "gender_gap": 11.9, "pupil_teacher_ratio": 17.0, "class10_appeared": 2697, "class10_passed": 1625, "class10_pass_rate": 60.3}, {"state": "Dadra & Nagar Haveli", "literacy_rate": 77.65, "male_literacy_rate": 86.46, "female_literacy_rate": 65.93, "gender_gap": 20.5, "pupil_teacher_ratio": 30.2, "class10_appeared": 5681, "class10_passed": 3067, "class10_pass_rate": 54.0}, {"state": "Maharashtra", "literacy_rate": 82.91, "male_literacy_rate": 89.82, "female_literacy_rate": 75.48, "gender_gap": 14.3, "pupil_teacher_ratio": 29.2, "class10_appeared": 1549689, "class10_passed": 1411428, "class10_pass_rate": 91.1}, {"state": "Andhra Pradesh", "literacy_rate": 67.66, "male_literacy_rate": 75.56, "female_literacy_rate": 59.74, "gender_gap": 15.8, "pupil_teacher_ratio": 29.3, "class10_appeared": 46403, "class10_passed": 43984, "class10_pass_rate": 94.8}, {"state": "Karnataka", "literacy_rate": 75.6, "male_literacy_rate": 82.85, "female_literacy_rate": 68.13, "gender_gap": 14.7, "pupil_teacher_ratio": 19.0, "class10_appeared": 712754, "class10_passed": 617282, "class10_pass_rate": 86.6}, {"state": "Goa", "literacy_rate": 87.4, "male_literacy_rate": 92.81, "female_literacy_rate": 81.84, "gender_gap": 11.0, "pupil_teacher_ratio": 15.0, "class10_appeared": 20322, "class10_passed": 17966, "class10_pass_rate": 88.4}, {"state": "Lakshadweep", "literacy_rate": 92.28, "male_literacy_rate": 96.11, "female_literacy_rate": 88.25, "gender_gap": 7.9, "pupil_teacher_ratio": 10.5, "class10_appeared": 1390, "class10_passed": 1254, "class10_pass_rate": 90.2}, {"state": "Kerala", "literacy_rate": 93.91, "male_literacy_rate": 96.02, "female_literacy_rate": 91.98, "gender_gap": 4.0, "pupil_teacher_ratio": 18.2, "class10_appeared": 475698, "class10_passed": 470004, "class10_pass_rate": 98.8}, {"state": "Tamil Nadu", "literacy_rate": 80.33, "male_literacy_rate": 86.81, "female_literacy_rate": 73.86, "gender_gap": 13.0, "pupil_teacher_ratio": 22.8, "class10_appeared": 1068506, "class10_passed": 992450, "class10_pass_rate": 92.9}, {"state": "Puducherry", "literacy_rate": 86.55, "male_literacy_rate": 92.12, "female_literacy_rate": 81.22, "gender_gap": 10.9, "pupil_teacher_ratio": 14.2, "class10_appeared": 21910, "class10_passed": 20543, "class10_pass_rate": 93.8}, {"state": "Andaman & Nicobar Islands", "literacy_rate": 86.27, "male_literacy_rate": 90.11, "female_literacy_rate": 81.84, "gender_gap": 8.3, "pupil_teacher_ratio": 14.5, "class10_appeared": 5771, "class10_passed": 5110, "class10_pass_rate": 88.5}];
+
+const INK="#0b0b0b", INK2="#52514e", MUTED="#898781", GRID="#e1e0d9", AXIS="#c3c2b7";
+const BLUE="#2a78d6", RED="#e34948", MAGENTA="#e87ba4", GREY="#c7c6bf";
+
+const baseLayout = {
+  font: {family:'-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif', color:INK2, size:12},
+  paper_bgcolor:'#fff', plot_bgcolor:'#fff',
+  margin:{l:140,r:30,t:10,b:40},
+  hoverlabel:{bgcolor:'#0b0b0b', font:{color:'#fff', size:12}},
+};
+const config = {displayModeBar:false, responsive:true};
+
+// ---------- Chart 1: literacy ranking ----------
+(function(){
+  const d = [...DATA].sort((a,b)=>a.literacy_rate-b.literacy_rate);
+  const mean = d.reduce((s,r)=>s+r.literacy_rate,0)/d.length;
+  const top3 = new Set([...d].sort((a,b)=>b.literacy_rate-a.literacy_rate).slice(0,3).map(r=>r.state));
+  const bot3 = new Set([...d].sort((a,b)=>a.literacy_rate-b.literacy_rate).slice(0,3).map(r=>r.state));
+  const colors = d.map(r=> top3.has(r.state)?BLUE : bot3.has(r.state)?RED : GREY);
+
+  const trace = {
+    type:'bar', orientation:'h',
+    y:d.map(r=>r.state), x:d.map(r=>r.literacy_rate),
+    marker:{color:colors},
+    hovertemplate:'<b>%{y}</b><br>Literacy: %{x}%<extra></extra>',
+  };
+  const layout = Object.assign({}, baseLayout, {
+    height:820,
+    margin:{l:150,r:30,t:10,b:36},
+    xaxis:{title:'Overall literacy rate (%)', range:[0,105], gridcolor:GRID, zeroline:false},
+    yaxis:{tickfont:{size:10.5}, automargin:true},
+    shapes:[{type:'line', x0:mean,x1:mean,y0:-0.5,y1:d.length-0.5, line:{color:MUTED,width:1,dash:'dot'}}],
+    annotations:[{x:mean, y:d.length-0.5, text:`national avg ${mean.toFixed(0)}%`, showarrow:false,
+      xanchor:'left', font:{color:MUTED,size:10.5}, yshift:10}],
+  });
+  Plotly.newPlot('chart-literacy',[trace],layout,config);
+})();
+
+// ---------- Chart 2: gender gap dumbbell ----------
+(function(){
+  const d = [...DATA].sort((a,b)=>a.gender_gap-b.gender_gap);
+  const states = d.map(r=>r.state);
+  const widest = new Set([...d].sort((a,b)=>b.gender_gap-a.gender_gap).slice(0,3).map(r=>r.state));
+
+  const lines = {
+    type:'scatter', mode:'lines', x:[], y:[],
+    line:{color:AXIS,width:1.6}, hoverinfo:'skip', showlegend:false,
+  };
+  d.forEach(r=>{
+    lines.x.push(r.female_literacy_rate, r.male_literacy_rate, null);
+    lines.y.push(r.state, r.state, null);
+  });
+
+  const female = {
+    type:'scatter', mode:'markers', name:'Female',
+    x:d.map(r=>r.female_literacy_rate), y:states,
+    marker:{color:MAGENTA, size:9, line:{color:'#fff',width:1.5}},
+    hovertemplate:'<b>%{y}</b><br>Female literacy: %{x}%<extra></extra>',
+  };
+  const male = {
+    type:'scatter', mode:'markers', name:'Male',
+    x:d.map(r=>r.male_literacy_rate), y:states,
+    marker:{color:BLUE, size:9, line:{color:'#fff',width:1.5}},
+    hovertemplate:'<b>%{y}</b><br>Male literacy: %{x}%<extra></extra>',
+  };
+
+  const annotations = d.filter(r=>widest.has(r.state)).map(r=>({
+    x:r.male_literacy_rate, y:r.state, text:`+${r.gender_gap.toFixed(0)} pts`,
+    showarrow:false, xanchor:'left', xshift:8, font:{color:INK,size:10.5,family:'inherit'},
+  }));
+
+  const layout = Object.assign({}, baseLayout, {
+    height:900,
+    margin:{l:160,r:60,t:10,b:36},
+    xaxis:{title:'Literacy rate (%)', range:[45,108], gridcolor:GRID, zeroline:false},
+    yaxis:{tickfont:{size:10}, automargin:true},
+    legend:{orientation:'h', x:1, xanchor:'right', y:1.05},
+    annotations,
+  });
+  Plotly.newPlot('chart-gender',[lines,female,male],layout,config);
+})();
+
+// ---------- Chart 3: literacy vs gender gap scatter ----------
+(function(){
+  const xs = DATA.map(r=>r.literacy_rate), ys = DATA.map(r=>r.gender_gap);
+  const n = xs.length;
+  const meanX = xs.reduce((a,b)=>a+b,0)/n, meanY = ys.reduce((a,b)=>a+b,0)/n;
+  let num=0, den=0;
+  for(let i=0;i<n;i++){ num += (xs[i]-meanX)*(ys[i]-meanY); den += (xs[i]-meanX)**2; }
+  const slope = num/den, intercept = meanY - slope*meanX;
+  const sdX = Math.sqrt(xs.reduce((s,x)=>s+(x-meanX)**2,0)/n);
+  const sdY = Math.sqrt(ys.reduce((s,y)=>s+(y-meanY)**2,0)/n);
+  const cov = xs.reduce((s,x,i)=>s+(x-meanX)*(ys[i]-meanY),0)/n;
+  const r = cov/(sdX*sdY);
+  const xr = [Math.min(...xs), Math.max(...xs)];
+
+  const callouts = new Set([
+    ...[...DATA].sort((a,b)=>b.gender_gap-a.gender_gap).slice(0,2).map(r=>r.state),
+    ...[...DATA].sort((a,b)=>a.literacy_rate-b.literacy_rate).slice(0,2).map(r=>r.state),
+    ...[...DATA].sort((a,b)=>b.literacy_rate-a.literacy_rate).slice(0,2).map(r=>r.state),
+  ]);
+
+  const pts = {
+    type:'scatter', mode:'markers', x:xs, y:ys,
+    text:DATA.map(r=>r.state),
+    marker:{color:BLUE, size:10, opacity:0.85, line:{color:'#fff',width:1}},
+    hovertemplate:'<b>%{text}</b><br>Literacy: %{x}%<br>Gender gap: %{y} pts<extra></extra>',
+  };
+  const trend = {
+    type:'scatter', mode:'lines', x:xr, y:xr.map(x=>slope*x+intercept),
+    line:{color:RED,width:2}, hoverinfo:'skip',
+  };
+  const annotations = DATA.filter(d=>callouts.has(d.state)).map(d=>({
+    x:d.literacy_rate, y:d.gender_gap, text:d.state, showarrow:false,
+    xanchor:'left', xshift:6, yshift:4, font:{size:10.5,color:INK},
+  }));
+  annotations.push({x:0.03,y:0.05, xref:'paper',yref:'paper', text:`r = ${r.toFixed(2)}`,
+    showarrow:false, font:{size:14,color:RED,family:'inherit'}, xanchor:'left'});
+
+  const layout = Object.assign({}, baseLayout, {
+    height:520, margin:{l:60,r:30,t:10,b:50},
+    xaxis:{title:'Overall literacy rate (%)', gridcolor:GRID, zeroline:false},
+    yaxis:{title:'Gender gap (points)', gridcolor:GRID, zeroline:false},
+    showlegend:false, annotations,
+  });
+  Plotly.newPlot('chart-corr1',[pts,trend],layout,config);
+})();
+
+// ---------- Chart 4: PTR vs pass rate scatter ----------
+(function(){
+  const d = DATA.filter(r=>r.class10_pass_rate!==null);
+  const xs = d.map(r=>r.pupil_teacher_ratio), ys = d.map(r=>r.class10_pass_rate);
+  const n = xs.length;
+  const meanX = xs.reduce((a,b)=>a+b,0)/n, meanY = ys.reduce((a,b)=>a+b,0)/n;
+  let num=0, den=0;
+  for(let i=0;i<n;i++){ num += (xs[i]-meanX)*(ys[i]-meanY); den += (xs[i]-meanX)**2; }
+  const slope = num/den, intercept = meanY - slope*meanX;
+  const sdX = Math.sqrt(xs.reduce((s,x)=>s+(x-meanX)**2,0)/n);
+  const sdY = Math.sqrt(ys.reduce((s,y)=>s+(y-meanY)**2,0)/n);
+  const cov = xs.reduce((s,x,i)=>s+(x-meanX)*(ys[i]-meanY),0)/n;
+  const r = cov/(sdX*sdY);
+  const xr = [Math.min(...xs), Math.max(...xs)];
+
+  const callouts = new Set([
+    ...[...d].sort((a,b)=>b.pupil_teacher_ratio-a.pupil_teacher_ratio).slice(0,2).map(r=>r.state),
+    ...[...d].sort((a,b)=>a.class10_pass_rate-b.class10_pass_rate).slice(0,2).map(r=>r.state),
+    ...[...d].sort((a,b)=>b.class10_pass_rate-a.class10_pass_rate).slice(0,2).map(r=>r.state),
+  ]);
+
+  const pts = {
+    type:'scatter', mode:'markers', x:xs, y:ys, text:d.map(r=>r.state),
+    marker:{color:BLUE, size:10, opacity:0.85, line:{color:'#fff',width:1}},
+    hovertemplate:'<b>%{text}</b><br>Pupil-teacher ratio: %{x}<br>Pass rate: %{y}%<extra></extra>',
+  };
+  const trend = {
+    type:'scatter', mode:'lines', x:xr, y:xr.map(x=>slope*x+intercept),
+    line:{color:MUTED,width:2}, hoverinfo:'skip',
+  };
+  const annotations = d.filter(row=>callouts.has(row.state)).map(row=>({
+    x:row.pupil_teacher_ratio, y:row.class10_pass_rate, text:row.state, showarrow:false,
+    xanchor:'left', xshift:6, yshift:4, font:{size:10.5,color:INK},
+  }));
+  annotations.push({x:0.97,y:0.95, xref:'paper',yref:'paper', text:`r = ${r.toFixed(2)} (no meaningful relationship)`,
+    showarrow:false, font:{size:12.5,color:MUTED,family:'inherit'}, xanchor:'right'});
+
+  const layout = Object.assign({}, baseLayout, {
+    height:520, margin:{l:60,r:30,t:10,b:50},
+    xaxis:{title:'Pupil-teacher ratio (secondary)', gridcolor:GRID, zeroline:false},
+    yaxis:{title:'Class 10 pass rate (%)', gridcolor:GRID, zeroline:false},
+    showlegend:false, annotations,
+  });
+  Plotly.newPlot('chart-corr2',[pts,trend],layout,config);
+})();
+
+window.addEventListener('resize', ()=>{
+  ['chart-literacy','chart-gender','chart-corr1','chart-corr2'].forEach(id=>Plotly.Plots.resize(document.getElementById(id)));
+});
+
+// ============================================================
+// Venn diagram: below-average literacy / above-average gender
+// gap / above-average classroom crowding, and where they overlap
+// ============================================================
+(function(){
+  const meanLit = DATA.reduce((s,r)=>s+r.literacy_rate,0)/DATA.length;
+  const meanGap = DATA.reduce((s,r)=>s+r.gender_gap,0)/DATA.length;
+  const meanPTR = DATA.reduce((s,r)=>s+r.pupil_teacher_ratio,0)/DATA.length;
+
+  const A = new Set(DATA.filter(r=>r.literacy_rate < meanLit).map(r=>r.state));       // low literacy
+  const B = new Set(DATA.filter(r=>r.gender_gap > meanGap).map(r=>r.state));          // big gender gap
+  const C = new Set(DATA.filter(r=>r.pupil_teacher_ratio > meanPTR).map(r=>r.state)); // crowded classrooms
+
+  const inSet = (s,set)=>set.has(s);
+  const regionStates = key => DATA.map(r=>r.state).filter(s=>{
+    const a=inSet(s,A), b=inSet(s,B), c=inSet(s,C);
+    if(key==='A') return a&&!b&&!c;
+    if(key==='B') return !a&&b&&!c;
+    if(key==='C') return !a&&!b&&c;
+    if(key==='AB') return a&&b&&!c;
+    if(key==='AC') return a&&!b&&c;
+    if(key==='BC') return !a&&b&&c;
+    if(key==='ABC') return a&&b&&c;
+  });
+
+  const NS='http://www.w3.org/2000/svg';
+  const svg = document.getElementById('venn-svg');
+  function el(tag, attrs){
+    const e = document.createElementNS(NS, tag);
+    for(const k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+
+  // three symmetric circles
+  const R = 165;
+  const cA = {x:300, y:225}, cB = {x:460, y:225}, cC = {x:380, y:365};
+  const circles = [
+    {c:cA, color:'#2a78d6', label:'Below-average literacy', key:'A'},
+    {c:cB, color:'#e34948', label:'Bigger-than-average gender gap', key:'B'},
+    {c:cC, color:'#e8b23d', label:'More crowded classrooms', key:'C'},
+  ];
+
+  circles.forEach(circ=>{
+    svg.appendChild(el('circle', {
+      cx:circ.c.x, cy:circ.c.y, r:R, fill:circ.color, 'fill-opacity':'0.28',
+      stroke:circ.color, 'stroke-width':2,
+    }));
+  });
+
+  const regionLabelPos = {
+    A:{x:210,y:180}, B:{x:550,y:180}, C:{x:380,y:480},
+    AB:{x:380,y:150}, AC:{x:255,y:330}, BC:{x:505,y:330}, ABC:{x:380,y:270},
+  };
+  const regionNames = {
+    A:'Low literacy only', B:'Big gender gap only', C:'Crowded classrooms only',
+    AB:'Low literacy + big gender gap', AC:'Low literacy + crowding',
+    BC:'Big gender gap + crowding', ABC:'All three problems at once',
+  };
+
+  Object.keys(regionLabelPos).forEach(key=>{
+    const states = regionStates(key);
+    const pos = regionLabelPos[key];
+    const hit = el('circle', {cx:pos.x, cy:pos.y-6, r:34, fill:'transparent', class:'venn-region', 'data-key':key});
+    hit.addEventListener('click', ()=>showVennDetail(key));
+    svg.appendChild(hit);
+    const t1 = el('text', {x:pos.x, y:pos.y, 'text-anchor':'middle', class:'venn-count'});
+    t1.textContent = states.length;
+    t1.style.pointerEvents='none';
+    svg.appendChild(t1);
+  });
+
+  // legend
+  circles.forEach((circ,i)=>{
+    const ly = 30 + i*22;
+    svg.appendChild(el('rect', {x:20, y:ly-11, width:12, height:12, fill:circ.color}));
+    const t = el('text', {x:38, y:ly, class:'venn-legend'});
+    t.textContent = circ.label;
+    svg.appendChild(t);
+  });
+
+  window.showVennDetail = function(key){
+    const states = regionStates(key);
+    const box = document.getElementById('venn-detail');
+    box.style.display = 'block';
+    box.innerHTML = `<b>${regionNames[key]} (${states.length} state${states.length===1?'':'s'})</b>` +
+      (states.length ? `<ul>${states.map(s=>`<li>${s}</li>`).join('')}</ul>` : '<div style="margin-top:6px;">No states fall into this exact combination.</div>');
+    box.scrollIntoView({behavior:'smooth', block:'nearest'});
+  };
+})();
+
+// ============================================================
+// Data Assistant — a simple, honest, client-side Q&A widget.
+// It only pattern-matches against the dataset already on this
+// page. No external API calls, no keys, nothing sent anywhere.
+// ============================================================
+(function(){
+  const byState = {};
+  DATA.forEach(r => byState[r.state.toLowerCase()] = r);
+  const meanLit = DATA.reduce((s,r)=>s+r.literacy_rate,0)/DATA.length;
+  const meanGap = DATA.reduce((s,r)=>s+r.gender_gap,0)/DATA.length;
+
+  window.toggleChat = function(){
+    const panel = document.getElementById('chat-panel');
+    panel.classList.toggle('open');
+    if(panel.classList.contains('open') && !panel.dataset.greeted){
+      panel.dataset.greeted = '1';
+      addMsg('bot', "Hi! Ask me about any state, or try one of the suggestions below.");
+    }
+  };
+
+  window.submitChat = function(e){
+    e.preventDefault();
+    const input = document.getElementById('chat-input');
+    const q = input.value.trim();
+    if(!q) return false;
+    input.value = '';
+    askChat(q);
+    return false;
+  };
+
+  function addMsg(who, text){
+    const log = document.getElementById('chat-log');
+    const div = document.createElement('div');
+    div.className = 'msg ' + who;
+    div.textContent = text;
+    log.appendChild(div);
+    log.scrollTop = log.scrollHeight;
+  }
+
+  function findState(q){
+    const ql = q.toLowerCase();
+    let found = Object.keys(byState).find(s => ql.includes(s));
+    return found ? byState[found] : null;
+  }
+
+  function describeState(r){
+    const parts = [`${r.state}: literacy is ${r.literacy_rate}% overall (male ${r.male_literacy_rate}%, female ${r.female_literacy_rate}%, a gap of ${r.gender_gap} points).`];
+    parts.push(`It has about ${r.pupil_teacher_ratio} students per teacher.`);
+    parts.push(r.class10_pass_rate==null
+      ? `Its Class 10 exam pass rate isn't available (no students appeared that cycle in this data).`
+      : `Its Class 10 exam pass rate is ${r.class10_pass_rate}%.`);
+    parts.push(r.literacy_rate < meanLit ? "That's below the national average literacy in this dataset." : "That's above the national average literacy in this dataset.");
+    return parts.join(' ');
+  }
+
+  window.askChat = function(q){
+    addMsg('user', q);
+    const ql = q.toLowerCase();
+    let answer;
+
+    const state = findState(q);
+    if(state){
+      answer = describeState(state);
+    } else if(/highest|best|top/.test(ql) && /literac/.test(ql)){
+      const top = [...DATA].sort((a,b)=>b.literacy_rate-a.literacy_rate)[0];
+      answer = `${top.state} has the highest literacy rate at ${top.literacy_rate}%.`;
+    } else if(/lowest|worst/.test(ql) && /literac/.test(ql)){
+      const bot = [...DATA].sort((a,b)=>a.literacy_rate-b.literacy_rate)[0];
+      answer = `${bot.state} has the lowest literacy rate at ${bot.literacy_rate}%.`;
+    } else if(/gender|boy|girl/.test(ql) && /big|widest|large|highest/.test(ql)){
+      const top = [...DATA].sort((a,b)=>b.gender_gap-a.gender_gap)[0];
+      answer = `${top.state} has the biggest gap between boys and girls, at ${top.gender_gap} points.`;
+    } else if(/gender|boy|girl/.test(ql) && /small|narrow|lowest/.test(ql)){
+      const bot = [...DATA].sort((a,b)=>a.gender_gap-b.gender_gap)[0];
+      answer = `${bot.state} has the smallest gap between boys and girls, at ${bot.gender_gap} points.`;
+    } else if(/crowd|pupil|teacher|classroom/.test(ql)){
+      answer = "Classroom crowding (students per teacher) barely relates to exam pass rates in this data — the two are almost unrelated, even in states with very crowded classrooms like Uttar Pradesh and Bihar.";
+    } else if(/pattern|relat|correlat|link|connect/.test(ql)){
+      answer = "The clearest pattern here: states with higher overall literacy tend to have a much smaller gap between boys and girls. Classroom crowding, on the other hand, doesn't clearly relate to exam pass rates.";
+    } else if(/how many|number of state/.test(ql)){
+      answer = `This dataset covers ${DATA.length} states and union territories.`;
+    } else {
+      answer = "I can answer questions about a specific state's numbers, or about the highest/lowest literacy, the gender gap, or the classroom-crowding finding. Try naming a state, or use one of the suggestion buttons below.";
+    }
+    setTimeout(()=>addMsg('bot', answer), 220);
+  };
+})();
+</script>
+</body>
+</html>
